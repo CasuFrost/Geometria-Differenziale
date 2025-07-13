@@ -1,0 +1,634 @@
+\documentclass[10pt, letterpaper]{report}
+\input{../University_notes/preamble/preamble.tex}
+\title{Geometria Differenziale}
+\author{Marco Casu}
+\date{\vspace{-5ex}}
+\begin{document}
+\definecolor{bluchiaro}{HTML}{9fb0cf}
+\newpage
+\pagecolor{cartaRiciclata}
+\color{black}
+\includepdf{images/copertina.pdf}
+\noindent I seguenti appunti sono tratti dal corso di Geometria Differenziale tenuto dal docente Francesco Bottacin per l'Università degli Studi di Padova.
+\tableofcontents \newpage
+
+\fancyhf{}
+\fancyhead[L]{\nouppercase{\leftmark}}
+\fancyhead[R]{Sezione \thesection}
+\fancyfoot[C]{\thepage}
+\fancyfoot[L]{Geometria Differenziale}
+\fancyfoot[R]{Marco Casu}
+\newtheorem{definizione}{Definizione}
+\newtheorem{teorema}{Teorema}
+\newtheorem{esercizio}{Esercizio}
+\newtheorem{congettura}{Congettura}
+\newtheorem{lemma2}{Lemma}
+\newtheorem{proposizione}{Proposizione}
+\newtheorem{osservazione}{Osservazione}
+
+
+\chapter{Varietà Differenziabili}
+\section{Definizioni Preliminari, Varietà Topologiche}
+Uno degli scopi della geometria differenziale è quello di ricondurro lo studio di oggetti di forme complicate allo studio di un certo sotto-insieme di $\R^n$, si consideri una superficie sferica in $\R^3$
+\begin{equation}
+    S^{2}=\{\mathbf x\in\R^3 \ : \ \|\mathbf x\|_2=1\}
+\end{equation}
+denotando con $\|\cdot\|_2$ la norma euclidea. Ogni punto della sfera (esclusi i poli) può essere individuato da due coordinate reali $(\varphi,\theta)\in[-\frac{\pi}{2},\frac{\pi}{2}]\times[0,2\pi]\subset\R^2$, dette latitudine e longitudine, come mostrato in figura \ref{img:sfera}. Si è introdotto un'opportuno sistema di coordinate allo scopo di ricondurre lo studio della sfera allo studio di un sottoinsieme di $\R^2$.
+\begin{figure}[h!]
+    \center
+    \includegraphics[width=0.8\textwidth ]{images/sfera.eps}
+    \caption{Sistema di coordinate per la sfera in $\R^3$}
+    \label{img:sfera}
+\end{figure}
+\begin{definizione}
+Sia $X$ un'insieme, e $\tau$ una collezione di sottoinsiemi di $X$, $\tau$ è una \textbf{topologia} in $X$ se\begin{itemize}
+    \item $\emptyset\in\tau$ e $X\in\tau$
+    \item Se $V_i\in\tau$ per $i=1,2\dots,n$ allora $\displaystyle\bigcap_{1\le i\le n}
+    V_i\in\tau$
+    \item Se $\{V_{\alpha}\}$ è una collezione di elementi di $\tau$ (finita, numerabile o non numerabile) allora $\displaystyle\bigcup_{\alpha}V_i\in\tau$.
+\end{itemize}
+\end{definizione}
+\begin{definizione}
+    Se un'insieme $X$ ammette una topologia $\tau$ allora $X$ è uno \textbf{spazio topologico} e gli insiemi in $\tau$ si dicono \textbf{insiemi aperti} di $X$.
+\end{definizione}
+\begin{definizione}
+    Se $X$ e $Y$ sono due spazi topologici, una funzione $f:X\rightarrow Y$ è \textbf{continua} se, per ogni aperto $V$ di $Y$, l'insieme $f^{-1}(V)$ è un'aperto di $X$.
+\end{definizione}
+\begin{definizione}
+    Una funzione $f:X\rightarrow Y$ fra due spazi topologici è un \textbf{omeomorfismo} se è biettiva, continua, e la sua inversa $f^{-1}$ è anch'essa continua.
+\end{definizione}
+$\R^n$ è il più semplice esempio di spazio topologico.
+La seguente definizione è fondamentale e necessaria alla successiva definizione di \textit{varietà}.
+\begin{definizione}
+    Sia $X$ uno spazio topologico e $U\subset X$ un'aperto, sia $\varphi$ un \textit{omeomorfismo} da $U$ ad un aperto di $\R^n$\begin{eqnarray}
+        \varphi:U\rightarrow\varphi(U)\subset \R^n\\ 
+        \varphi(U) \text{ è un'insieme aperto}
+    \end{eqnarray}
+    allora la coppia $(U,\varphi)$ è una \textbf{carta} per $X$.
+\end{definizione}
+\begin{figure}[h!]
+    \center
+    \includegraphics[width=0.55\textwidth ]{images/carta.eps}
+    \caption{Una carta da un'insieme $X$ ad un'aperto di $\R^2$}
+    \label{img:carta}
+\end{figure}
+In tal contesto la funzione inversa $\varphi^{-1}$ è detta \textit{parametrizzazione locale}. Si considera ora il caso in cui due carte si intersecano, ossia, per uno stesso spazio topologico $X$, vi sono due carte $(U_1,\varphi_1),(U_2,\varphi_2)$ tali per cui $U_1\cap U_2\ne\emptyset$, come mostrato in figura \ref{img:intersezione_carte}.
+\begin{figure}[h!]
+    \center
+    \includegraphics[width=0.7\textwidth ]{images/intersezione_carte.eps}
+    \caption{Intersezione fra due carte in $X$}
+    \label{img:intersezione_carte}
+\end{figure}
+
+La funzione $\varphi_2\circ\varphi_1^{-1}$ è definita solamente sulla regione $\varphi_1(U_1\cap U_2)\subset\R^n$, mentre $\varphi_1\circ\varphi_2^{-1}$ è definita solamente sulla regione $\varphi_2(U_1\cap U_2)\subset\R^n$, si ometterà tale restrizione nella notazione, e si assumerà che tali funzioni sono definite esclusivamente sugli insiemi menzionati.\bigskip
+
+\noindent 
+Le funzioni $\varphi_2\circ\varphi_1^{-1}$,$\varphi_1\circ\varphi_2^{-1}$ sono omeomorfismi tra aperti di $\R^n$. Da questo punto in avanti, date due carte $(U_i,\varphi_i),(U_j,\varphi_j)$, si denoterà\begin{equation}
+    \eta_{ij}=\varphi_i\circ\varphi_j^{-1}
+\end{equation}
+queste sono denominate \textbf{funzioni di transizione} e descrivono il cambiamento di coordinate fra due differenti aperti di $\R^n$. Le funzioni di transizione definiscono la relazione fra punti che si trovano su più insiemi aperti di $X$ sui quali sono definite differenti carte. Le funzioni di transizione soddisfano le seguenti identità:\begin{itemize}
+    \item $\eta_{ii}=\text{Id}$
+    \item $\eta_{ij}=\eta_{ji}^{-1}$
+    \item su $U_i\cap U_j\cap U_k$ si ha $\eta_{ij}\circ\eta_{jk}=\eta_{ik}$.
+\end{itemize}
+\begin{definizione}
+    Sia $X$ uno spazio topologico, e sia $\{(U_i,\varphi_i)\}_{i\in I}$ una famiglia di carte tali per cui \begin{equation}
+         X=\bigcup_{i\in I}U_i
+    \end{equation}
+    in tal caso l'insieme $\{(U_i,\varphi_i)\}_{i\in I}$ è un \textbf{atlante} per $X$.
+\end{definizione}
+\begin{definizione}
+     Sia $X$ uno spazio topologico, se esiste un atlante per $X$, quest'ultima è detta \textbf{varietà topologica}.
+\end{definizione}
+\begin{definizione}
+    Uno spazio topologico si dice \textbf{connesso} se non può essere rappresentato come l'unione di due o più insiemi aperti non vuoti e disgiunti.
+\end{definizione}
+Da questo punto in avanti si assumerà che gli spazi topologici considerati siano connessi.
+Un'atlante per uno spazio topologico $X$ è una famiglia di carte che ricopre l'intero spazio, si considerino due differenti carte su $X$ tali per cui 
+\begin{align}
+    &\varphi_1:U_1\rightarrow\varphi_1(U_1)\subset \R^n\\ 
+    &\varphi_2:U_2\rightarrow\varphi_2(U_2)\subset \R^m
+\end{align}
+se $U_1\cap U_2\ne \emptyset$ la funzione di transizione $\eta_{12}$ è un omeomorfismo tra un'aperto di $\R^m$ ad un'aperto di $\R^n$, necessariamente $n=m$ (la dimostrazione è omessa).
+\begin{osservazione}
+Se $X$ è una varietà topologica connessa, tutte le carte di un'atlante per $X$ sono funzioni che hanno come ambiente per il codominio $\R^n$, con $n$ fissato in comune per ogni carta, in tal caso si dice che $n$ è la \textbf{dimensione} della varietà $X$.
+\end{osservazione}
+La dimensione di una varietà è quindi ben definita dalle carte locali.
+\section{Funzioni Differenziabili sulle Varietà}
+Sia $X$ una varietà topologica di dimensione $n$, con atlante $\{(U_i,\varphi_i)\}$. Si consideri una funzione continua $f:X\rightarrow\R$, si ha:
+\[
+\begin{tikzcd}
+X \supset U_i \arrow[r, "{\varphi}_i"] \arrow[d, "f_{|U_i}"'] & \varphi(U_i) \subset \mathbb{R}^n \arrow[dl, "\tilde{f}_i"] \\
+\mathbb{R} &
+\end{tikzcd}
+\]
+ove $\tilde{f}_i=f_{|U_i}\circ\varphi_i^{-1}$. La funzione $\tilde{f}_i:\varphi(U_i)\rightarrow \R$ è una funzione definita su un'aperto di $\R^n$, sui quali si possono adoperare i metodi di studio dell'Analisi. 
+Se $U_i\cap U_j\ne\emptyset$, allora la funzione $\tilde f_j:\varphi(U_j)\rightarrow \R$ si può riscrivere $\tilde f_j=\tilde f_i\circ \eta_{ij}$\begin{itemize}
+    \item $\eta_{ij}$ è un omeomorfismo da un'aperto di $\R^n$ ad'un aperto di $\R^n$
+    \item $\tilde f_i$ è una funzione da un'aperto di $\R^n$ ad'un'aperto di $\R$
+    \item $\tilde f_j=\tilde f_i\circ \eta_{ij}$ è una funzione da un'aperto di $\R^n$ ad'un'aperto di $\R$.
+\end{itemize}
+Un diagramma commutativo è dato in figura \ref{img:intersezione_carte_fun}.
+\begin{figure}[h!]
+    \center
+    \includegraphics[width=0.7\textwidth ]{images/intersezione_carte_func.eps}
+    \caption{La funzione $f$ in relazione con l'intersezione fra due carte in $X$}
+    \label{img:intersezione_carte_fun}
+\end{figure}
+$\tilde f_i$ è la rappresentazione locale della funzione $f$ sull'aperto $U_i\subset X$. $\tilde f_i$ e $\tilde f_j$ sono funzioni differenti che rappresentano però la stessa funzione $f$, ma in sistemi di coordinate differenti.
+
+Se si vuole descrivere una funzione $f$ definita in $X$, si può definire localmente tramite un'atlante su $X$, ove per ciascuna carta locale $\varphi_i$ si identifica l'espressione locale di $f$, denotata $\tilde f_i$, vi è una funzione di questo tipo per ogni carta dell'atlante. Le funzioni $\tilde f_i$ sono descrizioni di $f$, non possono essere funzioni scelte arbitrariamente, ma devono soddisfare la relazione \begin{equation}
+    \tilde f_j = \tilde f_i\circ\eta_{ij}
+\end{equation}
+per ogni funzione di transizione $\eta_{ij}$.\begin{osservazione}
+    Usando tale fatto, si è ricondotto il problema di studiare una funzione $f$ su una varietà topologica, al problema dello studio di funzioni $\tilde f_i$ definite su aperti di $\R^n$.
+\end{osservazione}
+Si vuole definire ora la \textit{differenziabilità} di $f$ definita su una varietà topologica. Una funzione è di classe $C^r$ definita su $U$ aperto di $\R^n$ se tutte le sue derivate parziali fino all'ordine $r$ esistono e sono continue su $U$. Potremmo dire che $f$ definita su una varietà topologica $X$ è di classe $C^r$ su $U_i$ aperto di $X$ se e solo se una sua rappresentazione locale $\tilde f_i$ è di classe $C^r$ in $\varphi(U_i)$, ma ciò è errato in quanto si deve considerare il fatto che possa esistere una differente carta $(U_j,\varphi_j)$ che si interseca con $U_i$, tale per cui $\tilde f_j$ è di classe $C^{r'}$ con $r'<r$.
+\begin{definizione}
+    Una varietà topologica $X$ è di classe $C^r$ se tutte le funzioni di transizione $\eta_{ij}$ sono di classe $C^s$ con $s\ge r$.
+\end{definizione}
+\begin{osservazione}
+    Se una varietà $X$ è di classe $C^s$, si può definire la nozione di funzione $f$ di classe $C^r$ su $X$, con $r\le s$.
+\end{osservazione}
+\begin{definizione}
+    Una varietà topologica di classe $C^\infty$ è detta \textbf{varietà differenziabile}. Se $n$ è la dimensione della varietà, si denominerà semplicemente $n$-varietà.
+\end{definizione}
+Sulle funzioni definite su una varietà differenziabile si possono applicare i metodi del calcolo differenziale propri dell'Analisi. Essendo che ogni punto di una varietà $X$ è contenuto in un'intorno aperto omeomorfo ad un'insieme aperto di $\R^n$, le proprietà locali di una varietà sono le stesse della topologia in $\R^n$, in particolare ogni varietà è:\begin{itemize}
+    \item \textit{localmente compatta}
+    \item \textit{localmente connessa}
+\end{itemize}
+per completezza, saranno date le definizioni di tali proprietà.
+\begin{definizione}
+    Uno spazio topologico $X$ si dice \textbf{compatto} se da ogni suo ricoprimento costituito da una famiglia di insiemi aperti si può estrarre una sottofamiglia finita che è ancora un ricoprimento. Sia $\{U_i\}_{i\in I}$ una qualsiasi famiglia di sottoinsiemi aperti di $X$ tali per cui\begin{equation}
+        \bigcup_{i\in I}U_i=X 
+    \end{equation}
+    allora esiste un sottoinsieme finito $J\subset I$ tale per cui
+    \begin{equation}
+        \bigcup_{i\in J}U_i=X .
+    \end{equation}
+\end{definizione}
+\begin{definizione}
+    uno spazio topologico $X$ è detto \textbf{localmente compatto} se per ogni suo punto esiste un intorno la cui chiusura è un insieme compatto. Si ricordi che la chiusura di un'aperto $U$ è l'intersezione di tutti gli insiemi chiusi contenenti $U$.
+\end{definizione}
+\begin{definizione}
+    Uno spazio topologico $X$ è \textbf{localmente connesso} se ogni punto dello spazio ha un sistema di intorni connessi. Si ricordi che un sistema di intorni è un insieme di intorni tale che qualsiasi intorno aperto di $x\in X$ contiene uno di questi intorni.
+\end{definizione}
+Si assumerà (solitamente) che ogni varietà differenziabile $X$ considerata sia uno spazio topologico di Hausdorff, ossia per il quale vale il seguente assioma:\begin{equation}
+    \forall x,y\in X\ : \ x\ne y \ \exists U,V \text{ intorni aperti di }x,y\text{ tali che }U\cap V = \emptyset .
+\end{equation}
+\subsection{Esempi di Varietà}
+Sono dati in seguito alcuni esempi di varietà differenziabili.\bigskip
+
+
+\noindent\textbf{Esempio 1} $\R^n$ è una varietà differenziabile, anche ogni aperto di $\R^n$ lo è. Un qualunque spazio vettoriale reale di dimensione finita è isomorfo a $\R^n$, è quindi anch'esso una varietà.
+\begin{osservazione}
+    Anche uno spazio vettoriale a dimensione infinita può essere una varietà differenziabile, è però necessario considerare una definizione alternativa di carta, in cui non si esclude il fatto che l'immagine di una carta locale possa essere uno spazio vettoriale di dimensione infinita.
+\end{osservazione}
+\textbf{Esempio 2} Se $X$ è una varietà e $U\subset X$ è un'insieme aperto, allora $U$ è una varietà.
+\bigskip
+
+\noindent\textbf{Esempio 3} Il prodotto di due varietà è una varietà. Si consideri una $m$-varietà $X$ ed una $n$-varietà $Y$, sia $\mathcal A$ un'atlante per $X$ e $\mathcal B$ un'atlante per $Y$\begin{align}
+    &\mathcal A = \{(U_\alpha,\varphi_\alpha)\}\\
+    &\mathcal B = \{(V_\beta,\psi_\beta)\}.
+\end{align}
+Sia $\mathcal A\times \mathcal B=\{(U_\alpha\times V_\beta,\varphi_\alpha\times \psi_\beta)\}$ ove\begin{align}
+    &\varphi_\alpha\times\psi_\beta:U_\alpha\times V_\beta\rightarrow\R^m\times \R^n=R^{m+n}\\ &
+    (x,y)\longmapsto (\varphi_\alpha(x),\psi_\beta(y)).
+\end{align}
+Questo è un atlante per $X\times Y$, quest'ultima è quindi una $n+m$-varietà.
+\bigskip
+
+\noindent\textbf{Esempio 4} Si consideri l'insieme \begin{equation}
+    GL(n,\R)=\{A\in M(n,\R) \ : \ \det A\ne 0\}
+\end{equation}
+ossia l'insieme delle matrici quadrate $n\times n$ a valori reali il cui determinante è diverso da zero, questo è un sottoinsieme aperto di $\R^{n^2}$, quindi è una varietà. Il fatto che sia aperto è dato dal fatto che l'insieme delle matrici con determinante nullo è un'insieme chiuso.
+\bigskip
+
+\noindent\textbf{Esempio 5} Si consideri la sfera $S_R^{n}$ di raggio $R$ in $\R^{n+1}$
+\begin{equation}
+    S^{n}_R=\{\mathbf x\in\R^{n+1} \ : \ \|\mathbf x\|_2=R\}
+\end{equation}
+è uno spazio topologico la cui topologia è quella indotta di $\R^{n+1}$. Si definirà un'atlante per $S_R^{n}$ costituito da due carte.
+Si considerino i due poli\begin{align}
+    &N=(0,0,0\dots,R)\\
+    &S=(0,0,0\dots,-R)
+\end{align}
+si denota $p=(p^1,\dots,p^{n+1})$ un generico punto della sfera, si noti come le coordinate si identificano con degli apici piuttosto che con dei pedici, l'utilità di tale notazione sarà chiarita in seguito.
+    
+Sia $\pi$ l'iperpiano di equazione $x^{n+1}=0$, naturalmente identificato con $\R^n$. La prima carta è $(S_R^{n}\backslash\{N\},\varphi_N)$ \begin{equation}
+    \varphi_N:S_R^{n}\backslash\{N\}\rightarrow\pi\simeq\R^n
+\end{equation}
+definita come la \textit{proiezione stereografica}. Il punto $\varphi_N(p)\in\R^n$ identificato, è il punto che si trova su $\pi$ attraversato dall'unica retta che passa per $p$ e per $N$. Un'esempio in $\R^3$ è riportato in figura \ref{img:proiezione_stereografica}.
+
+\begin{figure}[h!]
+    \center
+    \includegraphics[width=0.4\textwidth ]{images/proiezione_stereografica.eps}
+    \caption{Proiezione stereografica in $\R^3$}
+    \label{img:proiezione_stereografica}
+\end{figure}
+
+
+Tale retta è definita dall'equazione\begin{equation}
+    \mathbf x(t)=N+t(p-N)
+\end{equation}
+con $t\in\R$. Le singole coordinate della retta al variare di $t$ sono date da \begin{equation}
+    \begin{cases}
+        x^1(t)=tp^1\\ 
+        x^2(t)=tp^2\\ 
+        \vdots \\ 
+        x^n(t)=tp^n\\ 
+        x^{n+1}(t)=R+t(p^{n+1}-R)
+    \end{cases}
+\end{equation}
+considerando l'intersezione con l'iperpiano $\pi$ si ricava \begin{equation}
+    t=\frac{R}{R-p^{n+1}}
+\end{equation}
+l'espressione di $\varphi_N$ è quindi 
+\begin{equation}
+   N+\frac{R}{R-p^{n+1}}(p-N)
+\end{equation}
+ristretta alle prime $n$ componenti\begin{equation}
+     \varphi_N(p)=\big(
+     \frac{Rp^1}{R-p^{n+1}},\frac{Rp^2}{R-p^{n+1}}\dots,  \frac{Rp^n}{R-p^{n+1}}    
+     \big)
+\end{equation}
+tale funzione è biettiva. Si noti come essendo $p\ne N$ i denominatori di ogni componente di $\varphi_N(p)$ non sono mai nulli. L'inversa di tale funzione è la seguente\begin{equation}
+\varphi_N^{-1}((y^1\dots,y^n))=\big(
+y^1\frac{2R^2}{(\|y\|_2)^2+R^2}\dots,  
+y^n\frac{2R^2}{(\|y\|_2)^2+R^2}, R\frac{(\|y\|_2)^2-R^2}{(\|y\|_2)^2+R^2}
+\big).
+\end{equation} Come seconda carta si considera la proiezione analoga $\phi_S$ dal punto $S$\begin{equation}
+    \varphi_S:S_R^{n}\backslash\{S\}\rightarrow\pi\simeq\R^n.
+\end{equation}
+L'espressione di $\varphi_S$ è  
+\begin{equation}
+     \varphi_S(p)=\frac{R}{R+p^{n+1}}(p^1,\dots,p^n)
+\end{equation}
+queste due carte costituiscono un'atlante per la sfera $S_R^{n}$. Bisogna verificare che le due carte siano compatibili, ossia che le funzioni di transizione siano di classe $C^\infty$, in modo da dimostrare che la varietà sia differenziabile.
+
+L'intersezione dei due aperti di $S_R^{n}$ è $S_R^{n}\backslash\{N,S\}$, si ha che $\varphi_N(S_R^{n}\backslash\{N,S\})=\R^n\backslash\{0\}$. La funzione di transizione $\varphi_S\circ\varphi_N^{-1}:\R^n\backslash\{0\}\rightarrow\R^n\backslash\{0\}$ è la seguente\begin{equation}
+    \eta_{SN}(y)=\frac{R^2}{(\|y\|_2)^2}y
+\end{equation}
+questa è di classe $C^\infty$ (la dimostrazione è omessa). L'altra funzione, ossia $\eta_{NS}=\eta_{SN}^{-1}$ è a sua volta di classe $C^\infty$.
+La sfera $S_R^{n}$ è una $n$-varietà differenziabile.
+\begin{osservazione}
+    Due è il numero minimo di carte per ricoprire una sfere.
+\end{osservazione}
+\textbf{Esempio 6} Prodotti di sfere sono varietà differenziabili, come il toro\begin{equation}
+    T^2=S^1\times S^1
+\end{equation}
+mostrato in figura \ref{img:toro}.
+\begin{figure}[h!]
+    \center
+    \includegraphics[width=0.35\textwidth ]{images/toro.pdf}
+    \caption{Rappresentazione geometrica del toro $T^2$}
+    \label{img:toro}
+\end{figure}
+\bigskip
+
+\noindent\textbf{Esempio 7} Gli esempi precedenti consideravano varietà ''immerse'' in $\R^n$, il seguente esempio riguarda una varietà differenziabile che non nasce come sotto varietà contenuta in $\R^n$. Lo spazio \textbf{proiettivo reale} di dimensione $n$ si può costruire come segue, si consideri la seguente relazione di equivalenza fra vettori in $\R^{n+1}\backslash\{\mathbf 0\}$:\begin{equation}
+    (x^0,x^1\dots,x^n)\sim(y^0,y^1\dots,y^n)\iff (y^0,y^1\dots,y^n)=(\lambda x^0,\lambda x^1\dots,\lambda x^n) \ \forall \lambda\ne 0.
+\end{equation}
+Si considera l'insieme quoziente delle classi di equivalenza rispetto tale relazione\begin{equation}
+    \mathbb P^n_{\mathbb R}=\frac{\mathbb R^{n+1}\backslash\{\mathbf 0\}}{\sim}
+\end{equation}
+si denota $(x^0:x^1\dots : x^n)$ un'elemento di $\mathbb P^n_{\mathbb R}$. Dal punto di vista geometrico, ogni elemento di $\mathbb P^n_{\mathbb R}$ è una retta passante per l'origine, come mostrato in figura \ref{img:spazio_proiettivo}.
+\begin{figure}[h!]
+    \center
+    \includegraphics[width=0.35\textwidth ]{images/spazio_proiettivo.eps}
+    \caption{Lo spazio $\mathbb P^1_{\mathbb R}$}
+    \label{img:spazio_proiettivo}
+\end{figure}
+
+I punti  $(x^0:x^1\dots : x^n)$ si denominano \textbf{coordinate omogenee} in $\mathbb P^n$ (da ora in poi si omette il pedice $\mathbb R$). Lo spazio proiettivo deve essere dotato di una topologia, siccome $\mathbb P^n$ è un'insieme quoziente, è quindi dotato della \textit{topologia quoziente}, ai fini dell'esempio, non è necessario conoscere i dettagli di tale topologia.\bigskip
+
+Si vuole ora costruire un atlante per $\mathbb P^n$, si pone\begin{equation}
+    U_i=\{(x^0:x^1\dots : x^n)\in \mathbb P^n \ : \ x^i\ne 0\}
+\end{equation}
+di tali insiemi $U_i$ ce ne sono $n+1$, per $i=0,1\dots n$. Si ha che \begin{equation}
+    \mathbb P^n=\bigcup_{0\le i\le n}U_i
+\end{equation}
+ogni punto dello spazio proiettivo deve avere almeno una coordinata diversa da zero, quindi deve essere necessariamente in uno degli insiemi $U_i$. Bisogna definire ora le carte locali, si pone $\varphi_i:U_i\rightarrow\R^n$ come segue\begin{equation}
+    \varphi_i(x^0:\dots:x^n)=\big(
+    \frac{x^0}{x_i},\dots \frac{x^{i-1}}{x_i},\frac{x^{i+1}}{x_i} ,\dots\frac{x^{n}}{x_i}       
+    \big)
+\end{equation}
+nell'immagine di $\varphi_i$ si è esclusa la coordinata $x_i$, $\varphi_i$ è ben definita in quanto \begin{equation}
+    \varphi_i(x^0:\dots:x^n)=\varphi_i(\lambda x^0:\dots:\lambda x^n)
+\end{equation}
+non è difficile da verificare\begin{align}
+    &\varphi_i(\lambda x^0:\dots:\lambda x^n)=\big(
+    \frac{\lambda x^0}{\lambda x_i},\dots \frac{\lambda x^{i-1}}{\lambda x_i},\frac{\lambda x^{i+1}}{\lambda x_i} ,\dots\frac{\lambda x^{n}}{\lambda x_i}       
+    \big)=\\&\big(
+    \frac{x^0}{x_i},\dots \frac{x^{i-1}}{x_i},\frac{x^{i+1}}{x_i} ,\dots\frac{x^{n}}{x_i}       
+    \big)=\varphi_i(x^0:\dots:x^n).
+\end{align}
+La funzione inversa è la seguente\begin{align}
+    &\varphi_i^{-1}:\R^n\rightarrow U_i\\ 
+    &(y^1\dots,y^n)\longmapsto (y^1:\dots:y^i:1:y^{i+1}:\dots : y^n)
+\end{align}
+l'insieme $\{(U_i,\varphi_i)\}_{i=0,\dots n}$ è un atlante per $\mathbb P^n$. Bisogna verificare ora la regolarità delle funzioni di transizione. Siano $(U_i,\varphi_i),(U_j,\varphi_j)$ due carte, si considera $\eta_{ij}$:\begin{eqnarray}
+    \eta_{ij}(y^1\dots,y^n)=\\
+    \varphi_i\circ\varphi_j^{-1}(y^1\dots,y^n)=\\
+    \varphi_i(y^1:\dots:y^j:1:y^{j+1}:\dots : y^n)=\\ 
+    \big(
+    \frac{y^1}{y^i}:\dots :   \frac{y^{i-1}}{y^i}  :\frac{y^{i+1}}{y^i}  :\dots :  
+    \frac{y^{j}}{y^i} :\frac{1}{y^i}  :\frac{y^{j+1}}{y^i} :\dots : \frac{y^{n}}{y^i} 
+    \big)
+\end{eqnarray}
+essendo che $y^i\ne 0 \ne y^j$, ogni funzione di transizione $\eta_{ij}$ è di classe $C^\infty$. In conclusione, $\mathbb P^n$ è una $n$-varietà differenziabile.\begin{osservazione}
+    $\mathbb P^n_\R$ è l'insieme dei sotto spazi vettoriali di dimensione $1$ di $\R^{n+1}$, dato che contiene tutte le rette passanti per l'origine.
+\end{osservazione}
+Tale struttura si può generalizzare, sia $V$ uno spazio vettoriale sul campo reale di dimensione $n$, si definisce\begin{equation}
+    Gr_k(V)=\{\text{ insieme dei sottospazi di }V\text{ di dimensione }k\}
+\end{equation}
+si ha che $\mathbb P^n_\R=Gr_{1}(\R^{n+1})$. L'insieme $Gr_{2}(\R^{n+1})$ contiene tutti gli iperpiani passanti per l'origine. Anche $Gr_k(V)$ è una varietà differenziabile di dimensione $k(n-k)$ ed è detta \textit{varietà grassmanniana}.
+\subsection{Il Teorema degli Insiemi di Livello}
+Il teorema presentato in tale sezione è rilevante. Sono necessari prima alcuni risultati, ed alcune definizioni.\begin{definizione}
+    Sia $\Omega\subset\R^n$ un'aperto e sia $F:\Omega\rightarrow\R^m$ una funzione di classe $C^1$. Un punto $p\in\Omega$ è un \textbf{punto critico} di $F$ se il differenziale $dF_p:\R^n\rightarrow\R^m$ non è suriettivo (il rango della matrice Jacobiana in tal punto non è $m$). Il punto $F(p)$ è detto \textbf{valore critico}.
+\end{definizione}
+Sia $Crit(F)\subset\Omega$ l'insieme dei punti critici di $F$, tale insieme è chiuso (la dimostrazione è omessa). Si ricordi che nel caso $m=1$, un punto critico è un punto in cui il gradiente di $F$ si annulla. Se $n=m$, un punto è critico se la matrice Jacobiana ha determinante nullo.
+
+Un punto è regolare se non è critico, e la sua immagine tramite $F$ è un valore regolare.
+\begin{teorema}\label{teo:func_inv}\textbf{(della funzione inversa)}
+Sia $\Omega\subset\R^n$ un aperto, e $F:\Omega\rightarrow\R^n$ una funzione di classe $C^k$ con $k\ge 1$. Sia $p_0\in\Omega$ un punto regolare, ossia $\det(\text{Jac}F(p_0))\ne 0$, esiste un'intorno $U$ di $p_0$ ed un'intorno $V$ di $F(p_0)$ in $\R^n$ tali per cui la funzione \begin{equation}
+    F_{|U}:U\rightarrow V 
+\end{equation}
+è un diffeomorfismo (essa e la sua inversa sono differenziabili) la cui inversa è di classe $C^k$.
+\end{teorema}
+Intuitivamente, il teorema afferma che, se una funzione $F$ in un punto $p_0$ è approssimabile da un'applicazione lineare invertibile, anche $F$ stessa sarà localmente invertibile in un intorno di $p_0$.\bigskip
+
+Il seguente teorema è fondamentale ed afferma che le curve di livello di una funzione di classe $C^\infty$ sono varietà differenziabili.
+\begin{teorema}
+    Sia $\Omega\subset\R^{m+n}$ un aperto, e sia \begin{equation}
+        F:\Omega\rightarrow\R^m
+    \end{equation} una funzione di classe $C^\infty$. Sia $a\in F(\Omega)$, si consideri l'insieme di livello di $a$, ossia l'insieme dei punti in $\Omega$ in cui la funzione assume valore $a$, escludendo i punti critici:\begin{align}
+       &F^{-1}(a)=\{x\in\Omega \ : \ F(x)=a\}\\
+        & M_a=F^{-1}(a)\backslash Crit(F)
+    \end{align}
+    allora $M_a$ è uno spazio topologico, la cui topologia è quella indotta da $\R^{m+n}$, inoltre è una $n$-varietà differenziabile. Se $a$ è regolare, $M_a=F^{-1}(a)$.
+\end{teorema}
+\textit{Dimostrazione}: Bisogna costruire un atlante per $M_a$, e mostrare che le funzioni di transizione sono di classe $C^\infty$. Si consideri un punto $p_0\in M_a$, siccome tale punto non è critico (per ipotesi), la matrice Jacobiana $\text{Jac}F(p_0)$ ha rango massimo, ossia $m$. Questo significa che esiste almeno una sotto-matrice di $\text{Jac}F(p_0)$ costituita da $n$ righe ed $m$ colonne che ha determinante diverso da zero. A meno di permutare le coordinate, si può assumere che queste siano le ultime $m$ colonne\begin{equation}\label{eq:jacobiana_G}
+    \det\begin{pmatrix}
+        \frac{\partial F^1}{\partial x^{n+1}(p_0)}&\dots& \frac{\partial F^1}{\partial x^{n+m}(p_0)}\\ 
+        \vdots & & \vdots \\ 
+        \frac{\partial F^m}{\partial x^{n+1}(p_0)}&\dots& \frac{\partial F^m}{\partial x^{n+m}(p_0)}
+    \end{pmatrix}\ne 0
+\end{equation}
+denotiamo tale matrice $B$, essa è invertibile. Si costruisce una funzione $G:\Omega\rightarrow\R^{n+m}$ definita ponendo \begin{equation}
+    G(x)=(x^1,\dots,x^n,F(x)).
+\end{equation}
+si considera poi la Jacobiana di $G$ in $p_0$\begin{equation}
+    \text{Jac}G(p_0)=\begin{pmatrix}
+        \text{Id}&\mathbf 0 \\ \mathbf * & B
+    \end{pmatrix}
+\end{equation}
+è una matrice quadrata di $n+m$ righe e colonne, $\text{Jac}G(p_0)$ è suddivisa in quattro componenti come mostrato, in particolare\begin{itemize}
+    \item $\text{Id}$ è la matrice identità, in quanto gli elementi di tali componenti sono del tipo \begin{equation}
+        \frac{\partial x^i}{\partial x^j}
+    \end{equation}
+    e chiaramente, se $i=j$ allora $\frac{\partial x^i}{\partial x^j}=\frac{\partial x^i}{\partial x^i}=1$, differentemente, se $i\ne j$ si ha che $\frac{\partial x^i}{\partial x^j}=0$, quindi la matrice risultante è l'identità.
+    \item La componente in alto a destra è la matrice nulla perché i termini sono tutti del tipo \begin{equation}
+        \frac{\partial x^i}{\partial x^{n+j}}
+    \end{equation}
+    e per ogni $i,j$ tale derivata è nulla.
+    \item La componente in basso a sinistra è composta dai termini del tipo 
+    \begin{equation}
+        \frac{\partial F^i}{\partial x^{n+j}}(p_0)
+    \end{equation} 
+    non vi sono assunzioni sui tali valori e con $\mathbf x$ si indica che tale matrice può assumere qualsiasi valore.
+    \item L'ultima componente contiene termini del tipo\begin{equation}
+        \frac{\partial F^i}{\partial x^{n+j}}
+    \end{equation}
+    ed è chiaramente la matrice $B$, come dall'equazione \eqref{eq:jacobiana_G}.
+\end{itemize}
+si conclude che il determinante di $\text{Jac}G(p_0)$ è uguale al determinante di $B$, quindi diverso da zero\begin{equation}
+    \det\begin{pmatrix}
+        \text{Id}&\mathbf 0 \\ \mathbf * & B
+    \end{pmatrix}=\det B\ne 0.
+\end{equation}
+A tal punto si può applicare il Teorema \eqref{teo:func_inv}, $G$ è localmente invertibile, ossia esistono degli intorni $\tilde U\subset\Omega\backslash Crit(F)$ di $p_0$, e $W\subset\R^{n+m}$ di $G(p_0)$ tali che \begin{equation}
+    G_{|\tilde U}:\tilde U \rightarrow W 
+\end{equation}
+è un diffeomorfismo. Sia $H$ l'inversa di $G_{|\tilde U}$\begin{equation}
+    H(y)=(h^1(y),\dots h^{n+m}(y))
+\end{equation}
+essendo $H$ l'inversa di $G$ si ha che $G(H(y))=y$, in particolare\begin{eqnarray}
+    y=(y^1,\dots y^{n+m})=G(H(y))=\\(h^1(y),\dots h^{n+m}(y),F(H(y)))
+\end{eqnarray}
+quindi per $i=1,2\dots,n$ si ha che $h^i(y)=y^i$. Pertanto\begin{eqnarray}
+    F(H(y))=F(h^1(y),\dots,h^n(y),h^{n+1}(y),\dots h^{n+m}(y))=\\ 
+    F(y^1,\dots,y^n,h^{n+1}(y),\dots h^{n+m}(y))
+\end{eqnarray}
+ma dato che $y=(h^1(y),\dots h^{n+m}(y),F(H(y)))$ si ha che l'ultimo blocco di $F(y^1,\dots,y^n,h^{n+1}(y),\dots h^{n+m}(y))$, ossia $h^{n+1}(y),\dots h^{n+m}(y)$, deve essere uguale all'ultimo blocco di $y$, quindi \begin{equation}
+    F(H(y))=(y^{n+1}\dots, y^{n+m}) \ \ \forall y\in W
+\end{equation}
+Si pone $U=M_a\cap\tilde U$ e si definisce l'insieme \begin{equation}
+    V=\{x\in\R^n \ : \ (x,a)\in W\}
+\end{equation}
+è un aperto di $\R^{n}$ dato che $W$ è un aperto di $\R^{n+m}$. Si definisce una funzione \begin{equation}
+    \psi:V\rightarrow\R^{n+m}
+\end{equation}
+ponendo\begin{equation}
+    \psi(x)=(x,h^{n+1}(x,a)\dots,h^{n+m}(x,a))
+\end{equation}
+dall'uguaglianza ricavata prima \begin{equation}
+    F(y^1\dots,y^n,h^{n+1}(y)\dots ,h^{n+m}(y))=(y^{n+1}\dots,y^{n+m})
+\end{equation}
+si deduce che $\psi(V)=U=M_a\cap\tilde U$\begin{equation}
+    \psi:\R^n\supset V \rightarrow U \subset M_a\subset\R^{n+m}
+\end{equation}
+si pone $\varphi=\psi^{-1}$, questa è una carta locale su $M_a$, definita su un'intorno $U$ di $p_0$. Tale costruzione può avvenire per ogni punto $p_0$, per tanto questo definisce un'atlante, $M_a$ è quindi una varietà topologica. Bisogna ora mostrare che le funzioni di transizione siano differenziabili.\bigskip
+
+Siano $(U,\varphi)$ e $(U',\varphi')$ due carte, la funzione di transizione 
+$\varphi'\circ\varphi^{-1}=\varphi'\circ\psi$ ha come coordinate termini del tipo $x^i$ oppure $h^j(x,a)$ (per 
+costruzione), queste funzioni sono quindi di classe $C^\infty$.\hfill$\blacksquare$\bigskip
+
+Saranno presi in considerazione alcuni esempi di applicazione di tale teorema. Sia $F:\R^{n+1}\rightarrow\R$ la seguente funzione:\begin{equation}
+    F(x)=(\|x\|_2)^2
+\end{equation}
+ossia la funzione che associa ad ogni vettore la sua norma euclidea elevata al quadrato. La funzione è chiaramente di classe $C^\infty$, l'unico valore critico è $x=\mathbf 0$, in ogni altro punto, la matrice Jacobiana ha determinante diverso da zero, quindi per ogni $R\ne 0$ l'insieme di livello\begin{equation}
+    F^{-1}(R^2)=S^n_R
+\end{equation}
+è una $((n+1)-1)$-varietà (è la sfera di raggio $R$). La dimensione della varietà è la differenza fra la dimensione del dominio con quella del codominio.\bigskip
+
+\noindent Si consideri ora la funzione $F:M_n(\R)\simeq\R^{n^2}\rightarrow\R$ che assegna ad ogni matrice quadrata il suo determinante\begin{equation}
+    F(A)=\det A.
+\end{equation}
+Sia $X=(x_i^j)\in M_n(\R)$, il determinante si calcola tramite lo sviluppo di Laplace:\begin{equation}
+    \det X=\sum_{j=1}^n(-1)^{i+j}x_{i}^j\det X_i^j
+\end{equation}
+dove $X_i^j$ è la sotto-matrice di $X$ ottenuta eliminando la $i$-esima riga e la $j$-esima colonna. Da tale formula, si deduce che la derivata parziale di $F$ è la seguente\begin{equation}
+    \frac{\partial F}{\partial x_i^j}=(-1)^{i+j}\det X_i^j
+\end{equation}
+Il differenziale di questa funzione non è suriettivo sui punti critici, essendo il codominio di dimensione 1, il differenziale non è suriettivo se la matrice Jacobiana ha rango zero, ossia è la funzione nulla, in tal caso i punti critici di $F$ sono le matrici che hanno derivate parziali nulle, $X$ è un punto critico se tutte le sotto-matrici $X_i^j$ hanno determinante nullo\begin{equation}
+    X\text{ è critico }\iff \det X_i^j=0 \ \forall i,j.
+\end{equation}
+Ciò avviene se il rango di $X$ è minore o uguale di $n-2$\begin{equation}
+    Crit(F)=\{X\in M_2(\R) \ : \ rk(X)\le n-2\}.
+\end{equation}
+Il determinante di una matrice quadrata di rango non massimo è nullo, quindi l'unico valore critico di $F$ è zero\begin{equation}
+    \forall X\in Crit(F), \ F(X)=\det X=0.
+\end{equation}
+Si consideri un valore non critico, ad esempio 1, l'insieme di livello\begin{equation}
+    SL(n,\R)=F^{-1}(1)=\{X\in M_2(\R) \ : \ \det X=1\}
+\end{equation}
+questo è il gruppo speciale lineare, è una varietà differenziabile di dimensione $n^2-1$.\bigskip
+
+Tale teorema seppur potente nel suo enunciato va utilizzato in maniera corretta, si considerino le seguenti funzioni $F:\R^2\rightarrow\R$ e $G:\R^2\rightarrow\R$:\begin{align}
+    & F(x,y)=y\\
+    & G(x,y)=y^2
+\end{align}
+condividono l'insieme di livello per il valore 0:\begin{align}
+    &F^{-1}(0)=\{(x,y) \ : \ y=0\}\\ 
+    &G^{-1}(0)=\{(x,y) \ : \ y^2=0\}=\{(x,y) \ : \ y=0\}.
+\end{align}
+$F^{-1}(0)=G^{-1}(0)$ indica la retta di equazione $y=0$ ed è una 1-varietà. Il Jacobiano di $F$ è costante ed è Jac$F=(0,1)$, il rango è 1, non ci sono quindi valori critici per $F$.\bigskip 
+
+Il Jacobiano di $G$ è Jac$G=(0,2y)$, ha rango nullo ove $y=0$, 0 è quindi un valore critico per $G$, il teorema non si può applicare  per $G^{-1}(0)$ perchè il valore non deve essere critico, nonostante ciò, questo insieme è comunque una varietà.\bigskip
+
+Le funzioni $F$ e $G$ hanno lo stesso insieme di livello per il valore 0 il teorema enuncia che\begin{quote}
+    l'antimmagine di un valore regolare è una varietà
+\end{quote}
+non dice che \begin{quote}
+    l'antimmagine di un valore critico non è una varietà
+\end{quote}
+quest'ultima condizione si può comunque verificare.
+\section{Funzioni Differenziabili fra Varietà}
+Si considerino due varietà differenziabili $X,Y$, di dimensioni $n$ ed $m$. Sia $F$ una funzione continua\begin{equation}
+    F:X\rightarrow Y
+\end{equation}
+si vuole definire il concetto di funzione di classe $C^r$ fra due varietà differenziabili. Ci si riconduce sempre ad insiemi aperti di $\R^n$, si considerino due carte per $X$ e per $Y$:\begin{align}
+    &(U,\varphi) \text{ carta per }X, \ \ p\in U\\ 
+    &(V,\psi) \text{ carta per }Y, \ \ q\in V
+\end{align}
+si considera $\tilde F$ la rappresentazione locale di $F$:
+\[
+\begin{tikzcd}
+X \supset U \arrow[r, "F_{|U}"] \arrow[d, "\varphi"] & V \subset Y \arrow[d, "\psi"] \\
+\mathbb{R}^m \supset \varphi(U) \arrow[r, "\widetilde{F}"] & \psi(V) \subset \mathbb{R}^m
+\end{tikzcd}
+\]
+si ha che\begin{equation}
+    \tilde F = \psi\circ F\circ\varphi^{-1}.
+\end{equation}
+$\tilde F$ è una funzione definita su un'aperto di $\R^n$ ad immagine su un'aperto di $\R^m$. 
+\begin{definizione}\label{def:func_diff}
+    Una funzione $F$ definita fra due varietà differenziabili è di classe $C^r$ in un'intorno di $p\in U$ se la sua rappresentazione locale $\tilde F$ è di classe $C^r$ in un'intorno di $q\in \varphi(p)$.
+\end{definizione}
+La definizione è ben posta se non dipende dalla scelta delle carte locali.
+
+Si considerino due carte per $X$ $(U_1,\varphi_1),(U_2,\varphi_2)$ con $p\in U_1\cap U_2$. Siano $(V_1,\psi_1),(V_2,\psi_2)$ due carte per $Y$, con $q=F(p)\in V_1\cap V_2$. Si ha che
+\[
+\begin{tikzcd}[column sep=huge, row sep=huge]
+\varphi_1(U_1 \cap U_2) \arrow[r, "\tilde F_1"] & \psi_1(V_1 \cap V_2) \\
+U_1 \cap U_2\arrow[u, "\varphi_1"'] \arrow[d, "\varphi_2"'] \arrow[r, "F_{|U_1 \cap U_2}"] & V_1 \cap V_2 \arrow[d, "\psi_2"']\arrow[u, "\psi_1"']  \\
+\varphi_2(U_1 \cap U_2) \arrow[r, "\tilde{F}_2"] & \psi_2(V_1 \cap V_2)
+\arrow[from=3-1, to=1-1, bend left=50, looseness=1.5, "\varphi_1 \circ \varphi_2^{-1} = \eta{12}"{above, xshift=-1cm}, red]
+\arrow[from=3-2, to=1-2, bend right=50, looseness=1.5, "\vartheta_{12} = \psi_1 \circ \psi_2^{-1}"{below, xshift=1cm}, red]
+\end{tikzcd}
+\]
+$F$ ha due rappresentazioni locali, $\tilde F_1$ e $\tilde F_2$, sono tali che:\begin{equation}
+    \tilde F_2=\vartheta_{12}^{-1}\circ\tilde F_1\circ\eta_{12}.
+\end{equation}
+La Definizione \ref{def:func_diff} è ben posta se, ogni qual volta una rappresentazione locale di $F$ ha una certa regolarità (è di classe $C^r$), allora anche una sua altra rappresentazione deve esserlo, siccome queste sono collegate dalle funzioni di transizione, l'unico modo per garantire ciò è che le funzioni di transizione siano a loro volta di classe $C^r$, ma queste per definizione di varietà differenziabile sono di classe $C^\infty$.\begin{definizione}
+    Una funzione $F:X\rightarrow Y$ definita fra due varietà differenziabili è differenziabile se è di classe $C^\infty$ in ogni punto di $X$.
+\end{definizione}
+\begin{proposizione}
+Siano $X,Y,Z$ tre varietà differenziabili, e siano \begin{align}
+    &F:X\rightarrow Y\\ 
+    &G:Y\rightarrow Z
+\end{align}
+funzioni differenziabili, allora\begin{equation}
+    G\circ F:X\rightarrow Z 
+\end{equation}
+è differenziabile.
+\end{proposizione}
+\begin{definizione}
+    Una funzione $F:X\rightarrow Y$
+ fra varietà differenziabili è un diffeomorfismo di classe $C^r$ se è biettiva, di classe $C^r$, e la sua inversa è di classe $C^r$. Se non specificato, un diffeomorfismo è inteso di classe $C^\infty$. \end{definizione}
+ \textbf{Esempio} Si consideri la varietà\begin{equation}
+    X=GL(n,\R)=\{A\in M(n,\R) \ : \ \det A\ne 0\}
+ \end{equation}
+ è di dimensione $n^2$, la varietà $X\times X$ è di dimensione $2n^2$. L'applicazione\begin{align}
+   & F:X\times X\rightarrow X\\ 
+   &F(A,B)=A\cdot B
+ \end{align}
+ che associa a due matrici il loro prodotto\begin{align}
+    &C=A\cdot B\\ 
+    &c_j^i=\sum_h a_h^ib_j^h
+ \end{align}
+ le componenti di $F$ sono funzioni polinomiali, quindi $F$ è di classe $C^\infty$, pertanto è differenziabile.\bigskip
+
+ Si consideri ora la funzione $G:X\rightarrow X$ definita come segue\begin{equation}
+    G(A)=A^{-1}
+ \end{equation}
+ per le stesse ragioni, $G$ è differenziabile. Le funzioni $F$ e $G$ determinano il \textit{gruppo moltiplicativo} delle matrici quadrate a determinante non nullo, tali funzioni sono differenziabili, il gruppo $GL_n(\R)$ è un \textit{gruppo di Lie}.
+ \begin{definizione}
+    Un \textbf{gruppo di Lie} è un gruppo $G$, dotato di una struttura di varietà differenziabile, e per cui le funzioni che lo definiscono \begin{align}
+        & G\times G\rightarrow G\text{ operazione binaria}\\ 
+       & G\rightarrow G \text{ inverso}
+    \end{align}
+    sono entrambe differenziabili.
+ \end{definizione}
+ Il gruppo $(\R^n,+)$ è un gruppo di Lie.\bigskip
+
+ \noindent\textbf{Esempio} Si consideri la varietà $X_1=\R$ (la retta reale) con unica carta $(U,\varphi)$ la funzione identità\begin{align}
+    &\varphi:U\rightarrow \R\\ 
+    &\varphi(x)=x\\ 
+    &U=X_1.
+ \end{align}
+Si consideri poi $X_2=\R$  con unica carta $(V,\psi)$ la funzione cubica\begin{align}
+    &\varphi:V\rightarrow \R\\ 
+    &\varphi(x)=x^3\\ 
+    &V=X_2.
+ \end{align}
+anche $X_2$ è la retta reale, ma dotata di una differente carta. Esistono varietà differenziabili diverse ma tra loro \textbf{diffeomorfe}, possono essere identificate da un diffeomorfismo, è il corrispettivo dell'isomorfismo fra gruppi. Due varietà sono uguali se diffeomorfe ed il diffeomorfismo che le mette in relazione è l'identità.\bigskip
+
+$X_1$ e $X_2$ sono diverse perché l'identità non è un diffeomorfismo, si consideri però la funzione\begin{align}
+    &F:X_1\rightarrow X_2\\
+    &F(x)=\sqrt[3]{x}
+\end{align}
+questa è un diffeomorfismo:\begin{itemize}
+    \item $F$ è biettiva
+    \item $F$ è continua
+\end{itemize}
+la rappresentazione locale  $\tilde F$ è la funzione identità\begin{equation}
+    \tilde F = x^3\circ \sqrt[3]{x}\circ x=x
+\end{equation}
+$\tilde F$ è chiaramente un diffeomorfismo.
+\begin{osservazione}
+    Come nell'Algebra si possono classificare i gruppi a meno di isomorfismi, si possono classificare le varietà differenziabili a meno di diffeomorfismi.
+\end{osservazione}
+In seguito, sono riportati alcuni risultati riguardanti la classificazione delle varietà differenziabili.\begin{itemize}
+    \item Esistono varietà topologiche che non ammettono alcuna struttura differenziabile. Le varietà topologiche di dimensioni 1, 2 e 3 ammettono sempre una struttura differenziabile
+    \item Le varietà topologiche di dimensioni 1, 2 e 3 ammettono un'unica struttura di differenziabile (a meno di diffeomorfismi).
+    \item Se $n\ne 4$, la varietà $\R^n$ ammette un'unica struttura differenziabile a meno di diffeomorfismi. $\R^4$ è uno spazio topologico speciale perché ammette un'infinità non numerabile di strutture di varietà differenziabile. Si noti come lo spazio tempo in Relatività Generale è descritto come una $4$-varietà.
+    \item La sfera unitaria $S^7$ ha 28 strutture differenziabili distinte non diffeomorfe e sono descritte tutte esplicitamente.
+    \item Non è ancora noto quale sia il numero di strutture differenziabili distinte non diffeomorfe per $S^4$.
+\end{itemize}
+\begin{definizione}
+    Una funzione $F:X\rightarrow Y$ è un \textbf{diffeomorfismo locale} se ogni $p\in X$ ha un'intorno aperto $U$ tale per cui $F(U)$ è aperto in $Y$ e la funzione\begin{equation}
+        F_{|U}:U\rightarrow F(U)
+    \end{equation}
+    è un diffeomorfismo.
+\end{definizione}
+\begin{definizione}\label{def:rivestimento}
+    Una funzione \begin{equation}
+        \pi:\tilde X\rightarrow X 
+    \end{equation}
+    fra due varietà è un \textbf{rivestimento} se \begin{enumerate}
+        \item $\pi$ è suriettiva e differenziabile
+        \item per ogni $p\in X$ vi è un intorno aperto connesso $U\subset X$ tale per cui, per ogni componente connessa $\tilde U$
+ di $\pi^{-1}(U)$, la restrizione $$ \pi_{|\tilde U}$$ è un diffeomorfismo fra $\tilde U$ e $U$.    \end{enumerate}
+ Se $\tilde X$ è semplicemente connesso, $\pi$ è un rivestimento universale.
+\end{definizione}
+Un'esempio è il seguente, siano\begin{align}
+    &\tilde X =\R\\ 
+    &X=S_R^1\subset \R^2\\
+    &\pi : \tilde X\rightarrow X\\ 
+    &\pi(t)=(R\cos t,R\sin t)
+\end{align}
+$\pi$ è un rivestimento universale.
+\end{document}
+
