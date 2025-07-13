@@ -630,5 +630,195 @@ Un'esempio è il seguente, siano\begin{align}
     &\pi(t)=(R\cos t,R\sin t)
 \end{align}
 $\pi$ è un rivestimento universale.
+\subsection{Esempi di Gruppi di Lie}
+Si consideri $\R^2$, questo si può identificare come il campo dei numeri complessi, ereditandone la struttura$\C$\begin{equation}
+    (a,b)\longleftrightarrow z=a+ib
+\end{equation}
+inoltre\begin{equation}
+    U(1)=\{z\in\C \ : \ |z|=1\}=\{(a,b)\in\R^2 \ : \ a^2+b^2=1\}=S^1
+\end{equation}
+$U(1)$ è un gruppo rispetto l'operazione di prodotto (il prodotto di due numeri complessi di norma unitaria è un numero di norma unitaria). $S^1$ eredita da $U(1)$ la struttura di gruppo abeliano (è un gruppo di Lie commutativo).\bigskip
+
+Si consideri $\R^4$ questo si identifica come l'insieme dei quaternioni \begin{align}
+    &\R^4\simeq\mathbb H\\ 
+    &(a,b,c,d)\longleftrightarrow z= a+bi+cj+dk
+\end{align}
+dove\begin{align}
+    &i^2=j^2=j^2=-1, \ ij=k, \ ji=-k, \ \text{ecc.}
+\end{align}
+il prodotto nell'insieme $\mathbb H$ non è commutativo. Il modulo per un quaternione si definisce come segue:\begin{equation}
+|z|^2=z\cdot\overline z=(a+bi+cj+dk)(a-bi-cj-dk)=a^2+b^2+c^2+d^2
+\end{equation} Il gruppo dei quaternioni unitari identifica la sfera $S^3$\begin{equation}
+    \{z\in\mathbb H \ : \ |z|=1\}=\{(a,b,c,d)\in\R^4 \ : \ a^2+b^2+c^2+d^2=1\}=S^3
+\end{equation}
+$S^3$ eredita dal gruppo dei quaternioni unitari una struttura di gruppo di Lie non abeliano.\bigskip
+
+\noindent
+Si considerino adesso le tre \textbf{matrici di Pauli}:\begin{equation}
+    \sigma_X=\begin{pmatrix}
+        0&1\\1&0
+    \end{pmatrix} \ \ \ 
+    \sigma_Y=\begin{pmatrix}
+        0&-i\\i&0
+    \end{pmatrix} \ \ \ 
+    \sigma_Z=\begin{pmatrix}
+        1&0\\0&-1
+    \end{pmatrix} 
+\end{equation}
+sono matrici complesse ed unitarie (svolgono un ruolo fondamentale nel calcolo quantistico). Si ha che\begin{equation}
+    \sigma_X^2=\sigma_Y^2=\sigma_Z^2=I=\begin{pmatrix}
+        1&0\\0&1
+    \end{pmatrix}
+\end{equation}
+inoltre\begin{equation}
+    \sigma_X\sigma_Y=i\sigma_Z, \ \  \sigma_Y\sigma_X=-i\sigma_Z, \ \ \text{ecc.}
+\end{equation}
+Se si moltiplica ogni matrice per $i$ si costruiscono tre nuove matrici:\begin{equation}
+\tilde\sigma_X=i\sigma_X \ \ \ 
+    \tilde\sigma_Y=i\sigma_Y \ \ \ 
+    \tilde\sigma_Z=i\sigma_Z
+\end{equation}
+queste soddisfano le seguenti relazioni\begin{align}
+    &\tilde\sigma_X^2=\tilde\sigma_Y^2=\tilde\sigma_Z^2=-I\\
+    &\tilde\sigma_X\tilde\sigma_Y=-\tilde\sigma_Z, \ \ \tilde\sigma_Y\tilde\sigma_X=\tilde\sigma_Z, \ \  
+    \tilde\sigma_Y\tilde\sigma_Z=-\tilde\sigma_X \\ 
+    & \tilde\sigma_Z\tilde\sigma_Y=\tilde\sigma_X, \ \ \tilde\sigma_X\tilde\sigma_Z=\tilde\sigma_Y, \ \  
+    \tilde\sigma_Z\tilde\sigma_X=-\tilde\sigma_Y
+\end{align}
+confrontando tali relazioni con quelle dei quaternioni, si stabilisce la seguente corrispondenza\begin{align}
+    &1\leftrightarrow I\\ 
+    &i\leftrightarrow \tilde\sigma_Z\\
+    &j\leftrightarrow \tilde\sigma_Y\\
+    &k\leftrightarrow \tilde\sigma_X
+\end{align}
+i quaternioni si possono quindi rappresentare come delle matrici\begin{align}
+    & z=a+bi+cj+dk\longleftrightarrow aI+b\tilde\sigma_Z+c\tilde\sigma_Y+d\tilde\sigma_X=\\ &\begin{pmatrix}
+        a+ib&c+id\\ -c+id&a-ib
+    \end{pmatrix} =A_z\in M(2,\C)
+\end{align}
+si noti che l'operazione di determinante è l'equivalente del modulo\begin{equation}
+    \det A_z=(a+ib)(a-ib)-(c+id)(-c+id)=a^2+b^2+c^2+d^2
+\end{equation}
+vi è quindi una corrispondenza fra il gruppo dei quaternioni unitari ed il gruppo delle matrici $2\times 2$ unitarie a valori complessi $SU(2)$ con determinante uguale ad 1, in particolare, i due gruppi sono isomorfi. In conclusione: \begin{equation}
+    SU(2)\simeq \{z\in\mathbb H \ : \ |z|=1\}\simeq S^3.
+\end{equation}
+\section{Quaternioni Unitari e Rotazioni}
+Si consideri l'insieme dei quaternioni con prima coordinata nulla
+\begin{equation}
+    \quat_0=\{0+bi+cj+dk\}\subset\quat_0
+\end{equation}
+$\quat_0$ si può identificare con $\R^3$ tramite la seguente mappa $q:\R^3\rightarrow\quat_0$:\begin{equation}
+    q(x^1,x^2,x^3)=x^1i+x^2j+x^3k.
+\end{equation} 
+Sia $z\in\quat$ un quaternione unitario, si definisce una trasformazione $R_z:\quat_0\rightarrow\quat_0$ come segue:\begin{align}
+   & x\in\R^3\\
+   & R_z(q(x))=zq(x)z^{-1}
+\end{align}
+il quaternione risultante avrà ancora parte reale nulla (facile da verificare). Siccome $\quat_0$ si identifica come $\R^3$, la funzione $R_z$ è identicamente una mappa fra vettori in $\R^3$. Si ha inoltre che la mappa $R_z$ è un'isometria di $\quat_0\simeq\R^3$:\begin{equation}
+    |R_z(q(z))|=|zq(x)z^{-1}|=|z|\cdot|q(x)|\cdot|z^{-1}|=|q(x)|
+\end{equation}
+$R_z$ è un'applicazione lineare, ha determinante unitario\begin{equation}
+    \det R_z=1
+\end{equation}
+la mappa $R_z:\R^3\rightarrow\R^3$ è una \textbf{rotazione} nello spazio $\forall z\in\quat, \ |z|=1$. Una rotazione si può sempre scrivere sotto forma di matrice (essendo lineare), se $z= a+bi+cj+dk$ con $|z|=1$, $R_z$ è rappresentata dalla seguente:\begin{equation}
+    R_z = \begin{pmatrix}
+a^2+b^2-c^2-d^2 & 2bc-2ad & 2bd+2ac \\
+2bc+2ad & a^2-b^2+c^2-d^2 & 2cd-2ab \\
+2bd-2ac & 2cd+2ab & a^2-b^2-c^2+d^2
+\end{pmatrix}
+\end{equation}
+si dimostra che ogni rotazione in $\R^3$ è del tipo $R_z$ per qualche quaternione unitario $z$. Per ogni rotazione in $\R^3$ esistono esattamente due quaternioni unitari che la descrivono\begin{equation}
+    R_z=R_z'\iff\begin{cases}
+        z=z'\ \text{ oppure}\\z=-z'
+    \end{cases}
+\end{equation}
+Ricapitolando:\begin{itemize}
+    \item Ad ogni quaternione di modulo 1 si è associata una matrice $A_z\in M(2,\C)$ tramite una corrispondenza biettiva
+    \item questa identifica il gruppo dei quaternioni unitari con il gruppo $SU(2)$.
+    \item Ad ogni quaternione di modulo 1 si è associata una matrice di rotazione $R_z\in SO(3)$ tramite una corrispondenza non biettiva
+    \item si ricordi che $SO(3)$ è il gruppo delle matrici ortogonali con determinante uguale ad 1.
+\end{itemize}
+Questo è un \textbf{omomorfismo suriettivo} di gruppi di Lie. Il nucleo dell'omomorfismo è $\{-I,I\}$:\begin{equation}\label{eq:SU2-SO3}
+    \frac{SU(2)}{\{I,-I\}}\simeq SO(3)
+\end{equation}
+$SU(2)$ e $SO(3)$ hanno una struttura di varietà differenziabile. Si noti come $SU(2)\simeq S^3$ è semplicemente connesso, quindi $SU(2)$ è il \textit{rivestimento universale} di $SO(3)$.\bigskip
+
+Dall'equazione \eqref{eq:SU2-SO3}, si ha che prendere il quoziente di $S^3$ rispetto il sottogruppo $\{I,-I\}$ significa identificare punti diametralmente opposti su $S^3$, ma le coppie di punti diametralmente opposti sulla sfera rappresentano lo spazio proiettivo $\mathbb P^3_\R$, considerando la relazione $\sim$ fra due punti su $S^3$\begin{equation}
+x\sim y\iff x=-y
+\end{equation} si hanno pertanto i seguenti diffeomorfismi:\begin{equation}
+    \mathbb  P^3_\R\simeq \frac{S^3}{\sim}\simeq  \frac{SU(2)}{\{I,-I\}}\simeq SO(3).
+\end{equation}
+
+
+
+\chapter{Lo Spazio Tangente}
+Si vuole definire il concetto di \textit{vettore tangente} ad una varietà in un suo punto.
+\begin{figure}[h!]
+    \center
+    \includegraphics[width=0.4\textwidth ]{images/vettore_tangente.eps}
+    \caption{Vettore tangente ad un punto di $X$}
+    \label{img:vec_tang}
+\end{figure}
+
+L'idea è quella di rappresentare un vettore tangente ad una varietà $X$ in un punto $p$ come vettore tangente ad un'arco di curva $\gamma$ contenuta in $X$ passante per $p$, come mostrato in figura \ref{img:vec_tang}. Tale idea va formalizzata utilizzando le carte locali di $X$. Tale idea è poco elegante dato che il vettore tangente in questo caso dipenderà dalla scelta della carta, va quindi considerato un'altro approccio.\section{Lo Spazio delle Derivazioni}
+Per spiegare l'idea si comincia con un caso semplice, si consideri la varietà $X=\R^n$. Dato un qualsiasi punto $p\in\R^n$, lo spazio tangente a tale punto, denotato $T_p\R^n$, è esattamente $\R^n$.\bigskip
+
+La definizione formale di spazio tangente sarà data in seguito, considerando la definizione poco elegante, è chiaro che nel caso di $\R^n$, una qualsiasi curva passante per un punto può identificare un qualsiasi vettore tangente.
+\bigskip
+
+Sia $v\in T_p\R^n\in\R^n$ un vettore tangente e sia $f$ una funzione di classe $C^\infty$ definita in un'intorno di $P$.
+
+Si può calcolare la \textbf{derivata direzionale} di $f$ in $p$ rispetto al vettore $v$:\begin{align}
+    &v=(a^1,a^2\dots,a^n)\in T_p\R^n\\
+    &\partial_vf(p)=\sum_{i=1}^n a^i\frac{\partial f}{\partial x_i}(p)
+\end{align}
+Si consideri ora l'insieme delle funzioni a valori reali derivabili infinite volte in $p$\begin{equation}
+    C_p^\infty=\{f:U\rightarrow\R \ : \ f\text{ è di classe }C^\infty \text{ in un'intorno aperto }U\text{ di }p\}
+\end{equation}
+la derivata direzionale valutata in $p$ è un'operatore da $ C_p^\infty$ ad $\R$\begin{align}
+    &\partial_{v_{|p}}: C_p^\infty\rightarrow\R\\ 
+    &f\longmapsto \partial_vf(p)
+\end{align}
+questa soddisfa le seguenti proprietà\begin{itemize}
+    \item $\partial_{v_{|p}}(f+g)=\partial_{v_{|p}}(f)+\partial_{v_{|p}}(g)$
+    \item $\partial_{v_{|p}}(\text{costante})=0$
+    \item $\partial_{v_{|p}}(fg)=\partial_{v_{|p}}(f)g(p)+f(p)\partial_{v_{|p}}(g)$ \textbf{regola di Leibniz}.
+\end{itemize}
+\begin{definizione}
+    Un'operatore $D: C_p^\infty\rightarrow\R$ che soddisfa le tre proprietà elencate in un punto $p$ è detto \textbf{derivazione centrata} in $p$.
+\end{definizione}
+Si denota $Der_p$ l'insieme di tali derivazioni. Ad ogni vettore di $\R^n$ risulta associata una di queste derivazioni, $Der_p$ ha la proprietà di essere uno spazio vettoriale sul campo dei reali, de facto \begin{align}
+    &D_1,D_2\in Der_p\implies D_1+D_2\in Der_p\\ 
+    & D\in Der_p,\lambda\in\R\implies \lambda D\in Der_p
+\end{align}
+Ritornando alla varietà $X=\R^n$ e allo spazio tangente $T_pX$, ad ogni vettore $v=(a^1,a^2\dots,a^n)$ in tale spazio, è associata una derivazione centrata in $p$:\begin{equation}
+    \partial_{v_{|p}}={\sum_{i=1}^n a^i\frac{\partial }{\partial x_i}}\hphantom{.}_{|p}\in Der_p
+\end{equation}
+questa associazione è lineare ed è un'omeomorfismo fra spazi vettoriali\begin{align}
+    &T_p\R^n\rightarrow Der_p\\ 
+    & v\longmapsto  \partial_{v_{|p}}
+\end{align}
+Questo spazio vettoriale è relativo ad un punto $p$. Ad ogni punto $p$ si può associare uno spazio vettoriale  $T_p\R^n$. Si vedrà in seguito che in realtà tale omeomorfismo è un'isomorfismo, gli spazi vettoriali $T_p\R^n, Der_p$ si possono identificare, in tal modo lo spazio vettoriale delle derivazioni si può identificare con lo spazio tangente (almeno nel caso di $\R^n$).\bigskip
+
+\noindent
+Si comincia definendo in maniera più rigorosa $C^\infty_p$. Sia $X$ una varietà differenziabile, e $p\in X$, se $U\subset X$ è un'aperto, si pone\begin{equation}
+    C^\infty(U)=\{f:U\rightarrow\R \ : \ f\text{ è di classe }C^\infty\}
+\end{equation}
+si considera l'insieme delle coppie $(U,f)$ tali per cui $U$ è un'aperto di $X$ contenente $p$ e $f\in C^\infty(U)$. Sull'insieme $\{(U,f)\}$ di tutte le coppie di questo tipo si definisce una relazione di equivalenza:\begin{equation}
+    (U_1,f_1)\sim (U_2,f_2)\iff \begin{matrix}
+        \exists W\text{ intorno aperto di }p\text{ tale che }\\W\subset U_1\cap U_2\text{ ove }f_{1_{|W}}=f_{2_{|W}}
+    \end{matrix}
+\end{equation}\begin{center}
+    \includegraphics[width=0.4\textwidth ]{images/relazione_C.eps}
+\end{center}
+Si richiede che $f_1$ ed $f_2$ coincidano in un qualche intorno aperto $W$ di $p$.
+\begin{definizione}
+    Si pone\begin{equation}
+        C_p^\infty=\frac{\{(U,f) \ : \ p\in U, f\in C^\infty(U)\}}{\sim}
+    \end{equation}
+    come insieme quoziente. Si indicherà $[(U,f)]\in  C_p^\infty$ una classe di equivalenza.
+\end{definizione}
+Si pone $f_p=[(U,f)]$ e si denomina \textbf{germe} di $f$ in $p$.
+\redText{lezione 4 minuto 1.12.47}
 \end{document}
 
