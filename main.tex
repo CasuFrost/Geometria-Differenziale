@@ -767,7 +767,6 @@ La definizione formale di spazio tangente sarà data in seguito, considerando la
 \bigskip
 
 Sia $v\in T_p\R^n\in\R^n$ un vettore tangente e sia $f$ una funzione di classe $C^\infty$ definita in un'intorno di $P$.
-
 Si può calcolare la \textbf{derivata direzionale} di $f$ in $p$ rispetto al vettore $v$:\begin{align}
     &v=(a^1,a^2\dots,a^n)\in T_p\R^n\\
     &\partial_vf(p)=\sum_{i=1}^n a^i\frac{\partial f}{\partial x_i}(p)
@@ -818,7 +817,185 @@ Si richiede che $f_1$ ed $f_2$ coincidano in un qualche intorno aperto $W$ di $p
     \end{equation}
     come insieme quoziente. Si indicherà $[(U,f)]\in  C_p^\infty$ una classe di equivalenza.
 \end{definizione}
-Si pone $f_p=[(U,f)]$ e si denomina \textbf{germe} di $f$ in $p$.
-\redText{lezione 4 minuto 1.12.47}
+Si pone $f_p=[(U,f)]$ e si denomina \textbf{germe} di $f$ in $p$. Intuitivamente il germe di una funzione in un punto $p$ è semplicemente una funzione definita in un qualche intorno $U$ di $p$ che è di classe $C^\infty$.
+Nell'insieme $C_p^\infty$ si possono definire somma e prodotto:\begin{align}
+    &[(U_1,f_1)]+[(U_2,f_2)]=[[(U_1\cap U_2,f_1+f_2)]]\\
+    &[(U_1,f_1)]\cdot[(U_2,f_2)]=[[(U_1\cap U_2,f_1 f_2)]].
+\end{align}
+$C_p^\infty$ ha una struttura di anello, si può verificare facilmente, è detto \textit{anello dei germi delle funzioni di classe $C^\infty$ in $p$}.\bigskip
+
+\noindent
+L'anello $C^\infty(U)$ prima definito, con $p\in U$, è omeomorfo a $C_p^\infty$ tramite la mappa:\begin{equation}
+    f\longmapsto  f_p=[(U,f)]
+\end{equation}
+che associa ad una funzione $f$ il suo germe in $p$.
+\begin{osservazione}
+    Sia $F:X\rightarrow Y$ una funzione differenziabile fra due varietà, se $U\subset Y$, allora $F^{-1}(U)$ è un'aperto di $X$, dato che $F$ è continua, se $f\in C^{\infty}(U)$, ossia è di classe $C^\infty$ su $U$, allora è valido il seguente diagramma commutativo:
+\end{osservazione}
+\[
+\begin{tikzcd}
+X \supset F^{-1}(U) \arrow[rr, "F"] \arrow[dr, "f \circ F"'] & & U \subset Y \arrow[dl, "f"] \\
+& \mathbb{R} &
+\end{tikzcd}
+\]
+Dato che $f$ e $F$ sono di classe $C^\infty$, lo è anche $f\circ F$ nell'insieme $F^{-1}(U)$. Per ogni aperto $U\subset Y$, la funzione $F:X\rightarrow Y$ induce una funzione $F^*$ come segue
+\begin{align}
+    &F^*:C^\infty(U)\rightarrow C^\infty(F^{-1}(U))\\
+    &f\longmapsto F^*(f)=f\circ F
+\end{align}
+si verifica che $F^*$ è un'omomorfismo di anelli. Questo vale per ogni aperto $U$, vi è un'analoga funzione di $F^*$ definita sui germi delle funzioni, sia $p\in X$ e $q=F(p)\in Y$:\begin{align}
+    &F_p^*:C^\infty_q\rightarrow C^\infty_p\\
+    &[(U,f)]\longmapsto [(F^{-1}(U),f\circ F)].
+\end{align}
+La funzione $F^*$ è detta ''pull back''.\subsection{Lo Spazio Cotangente}
+Si vuole definire in maniera ora formalmente il concetto di vettore tangente ad una varietà. La definizione di derivazione è stata già accennata:\begin{definizione}\label{def:derivazioni}
+    Sia $X$ una varietà e $p\in X$. Una \textbf{derivazione} in $p$ è un'operatore \begin{equation}
+        D:C^\infty_p\rightarrow \R  
+    \end{equation}
+    che soddisfa le seguenti proprietà:\begin{itemize}
+        \item $D(f+g)=D(f)+D(g)$
+        \item $D(\text{costante})=0$
+        \item $D(fg)=D(f)g(p)+D(g)f(p), \ \ \forall f,g\in C_p^\infty$
+    \end{itemize}
+\end{definizione}
+L'insieme delle derivazioni per $X$ in $p$ è denotato $Der_p$. Il numero reale associato è da intendersi come la derivata di una funzione del germe contenuto in $C^\infty_p$ calcolata in $p$.
+\begin{definizione}
+     Sia $X$ una varietà e $p\in X$. Lo \textbf{spazio tangente} a $X$ in $p$ è uno spazio vettoriale reale denotato $T_pX$ costituito da tutte le derivazioni di $X$\begin{equation}
+        T_pX=Der_p.
+     \end{equation}
+\end{definizione}
+Se $n$ è la dimensione della varietà $X$, $Der_p$ è isomorfo a $\R^n$. $T_pX$ è definito esclusivamente dalla varietà $X$ e da un punto $p$, e non dipende dalle carte locali.\bigskip
+
+Si consideri un punto $p\in X$ di una varietà, ad ogni punto possiamo associare l'anello $C_p^\infty$, vogliamo però associare ad ogni punto uno spazio tangente. In $C_p^\infty$ potremmo considerare il sottoinsieme di  tutti i germi di funzioni che si annullano in $p$\begin{equation}
+    C_p^\infty \supset m_p = \{f_p\in C_p^\infty \ :  \ f_p(p)=0 \}
+\end{equation}
+si ricordi che $f_p$ non è una funzione ma una classe di equivalenza $[(U,f)]$, dire $f_p(p)=0$ equivale a dire $f(p)=0$. $m_p$ è un \textbf{ideale}, perché è un sotto anello, ed un elemento di $m_p$ moltiplicato per un qualsiasi elemento di $ C_p^\infty$ produce un elemento a sua volta in  $m_p$:\begin{align}
+    &f_p\in m_p\\ 
+    &f'_p\in C_p^\infty \\ 
+    &f_p(p)=0\in \R\\
+    &f'_pf_p(p) =f_p(p)f'_p(p)=\\& 0\cdot f'_p(p)=0\implies\\
+   & f'_p\in m_p.
+\end{align}
+$m_p$ è un modulo sull'anello $C_p^\infty$, se si prende il quoziente \begin{equation}
+    \frac{m_p}{m_p^2}
+\end{equation}
+si ha un modulo sull'anello quoziente $\frac{C_p^\infty}{m_p}$. Tale quoziente è isomorfo a $\R$ (i dettagli verranno omessi), si ha una funzione $\phi:C_p^\infty\rightarrow \R$ definita\begin{equation}
+    \phi(g_p)=g_p(p)
+\end{equation}
+il nucleo di questa funzione (gli elementi che la annullano) è esattamente $m_p$, per definizione\begin{equation}
+    \ker\phi=m_p 
+\end{equation} 
+come detto prima, se si considera il quoziente  $C_p^\infty$ modulo il nucleo di $\phi$, si ottiene uno spazio isomorfo a $\R$. $\frac{m_p}{m_p^2}$ è un modulo sull'anello $\frac{C_p^\infty}{m_p}\simeq \R$, questo è un campo (il campo dei numeri reali), ma per definizione, un modulo su un campo è uno spazio vettoriale, conclusione:\begin{equation}
+    \frac{m_p}{m_p^2}\text{ è uno spazio vettoriale reale}
+\end{equation}
+in particolare, è uno spazio associato in modo canonico al punto $p$. Questa è una definizione nei termini dell'algebra commutativa, non ne è necessario conoscere i dettagli (io stesso non l'ho compresa). Lo spazio $\frac{m_p}{m_p^2}$ non è lo spazio tangente $T_pX$, ma il suo spazio duale:\begin{equation}
+     \frac{m_p}{m_p^2}\simeq \hom(T_pX,\R)=T_p^*X
+\end{equation}
+$ \frac{m_p}{m_p^2}=T_p^*X$ è detto lo \textbf{spazio cotangente}.\bigskip
+
+
+\noindent\textbf{Nota}: Il fatto che la dimensione dello spazio tangente ad un punto di una varietà sia la stessa della varietà, va dimostrato.
+\section{Derivazioni e Carte Locali}
+Si introducono ora le carte locali nel contesto dello spazio tangente. Sia $(U,\varphi)$ una carta per una varietà $X$ tale per cui $p\in U$. Siano $(x^1\dots,x^n)\in\R^n$ le coordinate di $\varphi(p)$. Le coordinate cartesiane in $\R^n$ determinano delle derivazioni naturali rispetto tali coordinate (le derivate parziali)\begin{equation}
+    \partial_1=\frac{\partial}{\partial x^1}, \ \partial_2=\frac{\partial}{\partial x^2}\dots,\partial_n=\frac{\partial}{\partial x^n}
+\end{equation}
+$\partial_i$ è la derivata nella direzione del versore determinato dall'asse $x^i$. Le derivate parziali corrispondo ad i versori degli assi, che sono la base canonica $(e_1,\dots,e_n)$ di $T_q\R^n\simeq\R^n$ per ogni $q\in\R^n$.\bigskip
+
+\noindent Si vogliono definire delle derivazioni definite su $U\subset X$. Usando $\varphi$ si possono associare derivazioni definite su $X$ a derivazioni classiche su $\R^n$ (le derivate parziali). Sia \begin{equation}
+    f_p=[(V,f)]\in C_p^\infty
+\end{equation}
+un germe nel punto $p$. Si può supporre che $V\subset U$ (dominio della carta locale), considerando eventualmente un'aperto più piccolo contenente $p$.
+\[
+\begin{tikzcd}[column sep=huge, row sep=huge]
+U \supset V \arrow[r, "\varphi"'] \arrow[d, "f"'] & \varphi(V) \subset \mathbb{R}^n \arrow[dl, "f \circ \varphi^{-1}"'] \\
+\mathbb{R}
+\end{tikzcd}
+\]
+Si pone\begin{equation}\label{eq:derivata}
+    \partial_{i_{|p}}(f_p)=\frac{\partial (f\circ\varphi^{-1})}{\partial x_i}(\varphi(p))
+\end{equation}
+$ \partial_{i_{|p}}(f_p)\in T_pX$ rappresenta il vettore tangente a $X$ lunga la curva che si ottiene come anti immagine del versore $x^i$ tramite la carta locale $\varphi$:\begin{itemize}
+    \item In $\R^n$ vi è $\varphi(p)=(\varphi_1(p),\dots\varphi_n(p))(x^1\dots,x^n)$
+    \item si consideri la curva $\gamma_i(t)=(x^1,x^2\dots,x^i+t\dots,x^n)$ che è una retta parallela all'$i$-esimo asse passante per $\varphi(p)$.
+    \item si considera l'anti-immagine di questa curva $\gamma(t)$ tramite la carta locale, ossia la curva $\varphi^{-1}(\gamma(t))$, questa è una curva su $X$ passante per $p$
+    \item il vettore $\partial_{i_{|p}}(f_p)$ è tangente a questa curva $\varphi^{-1}(\gamma(t))$ nel punto $p$ (ossia per $t=0$).  $\partial_{i_{|p}}(f_p)$  rappresenta la direzione in cui ''cambia'' la varietà quando ti muovi lungo la curva che corrisponde all'$i$-esimo asse coordinato locale. Una rappresentazione è riportata in figura \ref{img:derivata}.
+\end{itemize}
+
+\begin{figure}[h!]
+    \center
+    \includegraphics[width=0.7\textwidth ]{images/derivata.eps}
+    \caption{Un esempio per una $2$-varietà.}
+    \label{img:derivata}
+\end{figure}
+
+\begin{quote}
+$ \partial_{i_{|p}}(f_p)$ è un numero reale che rappresenta la variazione della funzione $f_p=[(f,U)]$ lungo la curva $\varphi^{-1}(\gamma(t))$.
+\end{quote}
+Le funzioni $\partial_{i_{|p}}$ sono delle derivazioni, soddisfano le proprietà date nella Definizione \ref{def:derivazioni}, sono quindi i vettori tangenti (elementi dello spazio tangente $T_pX$). Gli operatori $\partial_{i_{|p}}$ dipendono dalla scelta di una carta locale $\varphi$, come si può notare dalla definizione in \eqref{eq:derivata}. L'analogo della derivata parziale sulla carta locale dipende dalla scelta della carta locale, l'unica cosa indipendente da tale scelta è lo spazio tangente in un punto $T_pX$.
+\subsection{Differenziale di una Funzione fra Varietà}
+Si consideri una funzione $F:X\rightarrow Y$ fra due varietà, sia $p\in X$ e $q=F(p)\in Y$. Si consideri un vettore $v\in T_pX$, $v$ è tangente ad un'arco di curva $\sigma\subset X$ ove $p\in\sigma$, tramite $F$, si identifica una curva $F(\sigma)\subset Y$, chiaramente $q\in F(\sigma)$ e vi sarà un vettore $w$ tangente a $q$ lungo la curva $F(\sigma)$.
+
+\begin{center}
+    \includegraphics[width=0.7\textwidth ]{images/differenziale.eps}
+\end{center}
+
+
+\noindent La funzione $F$ induce una mappa (quella che associa $w$ a $v$) fra gli spazi tangenti $T_pX$ e $T_qY$. Tale mappa è detta \textbf{differenziale} di $F$ in $p$, ed è una funzione lineare fra spazi vettoriali. La definizione di differenziale sarà data interpretando $T_pX$ e $T_qY$ come gli spazi delle derivazioni.\bigskip
+
+Si ricordi che $F$ induce una funzione $F^*_p$ che è un'omomorfismo di anelli:
+\begin{align}
+    &F_p^*:C^\infty_{F(p)}\rightarrow C^\infty_p\\
+    &[(U,f)]\longmapsto f\circ F.
+\end{align}
+questa era il pull back, sia $D\in T_pX$ una derivazione, si ha il seguente diagramma:
+\[
+\begin{tikzcd}[column sep=huge, row sep=huge]
+C^\infty_{F(p)} \arrow[r, "F_p^*"'] \arrow[d, "D\circ F_p^*"'] & C_p^\infty \arrow[dl, "D"'] \\
+\R
+\end{tikzcd}
+\]
+La funzione $D\circ F_p^*$ associa ad ogni germe di funzione un numero reale\begin{equation}
+    D\circ F_p^*:C_{F(p)}^\infty\rightarrow\R
+\end{equation}
+Dato che $D$ è una derivazione, anche $D\circ F_p^*$ è una derivazione, si verifica facilmente:\begin{equation}
+(D\circ F_p^*)(f)=D(F_p^*(f))=D(f\circ F).
+\end{equation} L'applicazione lineare che associa elementi fra gli spazi tangenti (il differenziale di $F$) è la seguente\begin{align}
+    & T_pX\rightarrow T_{F(p)}Y\\
+    & D\longmapsto D\circ F_p^*
+\end{align}
+\begin{definizione}
+    Sia $F:X\rightarrow Y$ una funzione fra due varietà differenziabili. Si definisce il \textbf{differenziale} di $F$ in un punto $p\in X$ la seguente applicazione lineare\begin{align}
+        & dF_p:T_pX\longrightarrow T_{F(p)}Y\\
+    & D\longmapsto dF_p(D)=D\circ F_p^*.
+    \end{align}
+    A volte si denota $T_pF$.
+\end{definizione}
+Vediamo adesso alcune proprietà del differenziale.
+\begin{proposizione}
+    \begin{enumerate}
+    \item Sia $F$ la funzione identità su una varietà $X$\begin{equation}
+        F=\text{Id}_X:X\rightarrow X
+    \end{equation}
+    il suo differenziale è la funzione identità sullo spazio tangente\begin{equation}
+        dF_p=d(\text{Id}_X)_p=\text{Id}_{T_pX}.
+    \end{equation}
+    \item Se $X,Y,Z$ sono varietà e \begin{align}
+        &F:X\rightarrow Y\\ 
+        &G:Y\rightarrow Z
+    \end{align}
+    sono funzioni differenziabili, allora\begin{equation}
+        d(G\circ F)_p=dG_{F(p)}\circ dF_p.
+    \end{equation}
+\[
+\begin{tikzcd}[column sep=huge, row sep=huge]
+T_p X \arrow[r, "dF_p"] \arrow[dr, "d(G \circ F)_p"] & T_{F(p)} Y \arrow[d, "dG_{F(p)}"] \\
+& T_{G(F(p))} Z
+\end{tikzcd}
+\]
+Inoltre, se $F$ è un diffeomorfismo, $dF_p$ è un'isomorfismo di spazi vettoriali.
+\end{enumerate}
+\end{proposizione}
+\textit{Dimostrazione}:
+lezione 6 Teoria minuto 19.27
 \end{document}
 
