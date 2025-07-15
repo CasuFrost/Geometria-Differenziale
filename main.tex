@@ -996,6 +996,159 @@ Inoltre, se $F$ è un diffeomorfismo, $dF_p$ è un'isomorfismo di spazi vettoria
 \end{enumerate}
 \end{proposizione}
 \textit{Dimostrazione}:
-lezione 6 Teoria minuto 19.27
+Se $F=\text{Id}_X$, allora anche il pull back $F_p^*$ è l'identità, pertanto:\begin{equation}
+    d(\text{Id}_x)_p:D\rightarrow D\circ F_p^* =D\circ \text{Id}=D
+\end{equation}
+$d(\text{Id}_x)_p$ è quindi l'identità. La seconda proprietà si dimostra facilmente, sia $D\in T_pX$:\begin{align}
+    &d(G\circ F)_p(D)=D\circ (G\circ F)_p^*=D\circ (F_p^*\circ G_{F(p)}^*)=\\ 
+    &(D\circ F_p^*)\circ G_{F(p)}^*=dF_p(D)\circ G_{F(p)}^*=\\ 
+    &dG_{F(p)}(dF_p(D))=(dG_{F(p)}\circ dF_p)(D)
+\end{align}
+le due proprietà sono dimostrate.\hfill$\blacksquare$
+\section{La Dimensione dello Spazio Tangente}
+In questa sezione, verrà dimostrato che lo spazio tangente ad un punto di una $n$-varietà, è uno spazio vettoriale $n$-dimensionale\begin{equation}
+    \dim X=n\implies\dim T_pX=n.
+\end{equation}
+È necessario un lemma.
+\begin{lemma2}\label{lemma:funzioni_g}
+Sia $x_0=(x^1,\dots x^n)\in\R^n$ un punto, e sia $f\in C^\infty_ {x_0}$. Esistono dei germi di funzioni\begin{equation}
+    g_1,\dots g_n\in C^\infty_ {x_0}
+\end{equation}
+tali per cui\begin{equation}
+    g_j(x_0)=\frac{\partial f}{\partial x^j}(x_0)
+\end{equation}
+e per ogni $x$ contenuto in un intorno sufficientemente piccolo di $x_0$ si ha:\begin{equation}
+    f(x)=f(x_0)+\sum_{j=1}^n(x^j-x_0^j) g_j(x_0)
+\end{equation}
+equivalentemente\begin{equation}
+     f(x)=f(x_0)+\sum_{j=1}^n(x^j-x_0^j)\frac{\partial f}{\partial x^j}(x_0).
+\end{equation}
+\end{lemma2}
+Questa approssimazione si può interpretare come uno sviluppo in serie di Taylor troncato all'$n$-esimo termine della sommatoria.\bigskip
+
+\noindent\textit{Dimostrazione}: Siccome si considerano germi di funzioni, sia $(U,f)$ un rappresentante di $f\in  C^\infty_ {x_0}$. $U$ si può considerare un'intorno sufficientemente piccolo da contenere sia $x_0$ che $x$, tale per cui il segmento di linea che congiunge questi due è ancora contenuto in $U$.\begin{center}
+    \includegraphics[width=0.3\textwidth ]{images/insieme_stellato.eps}
+\end{center}
+Si può scrivere la differenza fra $f(x)$ e $f(x_0)$ sotto forma di integrale:\begin{align}
+    &f(x)-f(x_0)=\int_0^1\frac{\partial}{\partial t}f(x_0+t(x-x_0))dt=\\
+    &\sum_{j=1}^n(x^j-x_0^j)\int_0^1\frac{\partial f}{\partial x^j}(x_0+t(x-x_0))dt
+\end{align}
+Si definisce $g_j$ come segue\begin{equation}
+    g_j(x)=\int_0^1\frac{\partial f}{\partial x^j}(x_0+t(x-x_0))dt
+\end{equation}
+chiaramente \begin{align}
+     &g_j(x_0)=\int_0^1\frac{\partial f}{\partial x_0^j}(x_0+t(x_0-x_0))dt=\\
+     &\int_0^1\frac{\partial f}{\partial x_0^j}(x_0)dt=
+     \frac{\partial f}{\partial x_0^j}(x_0)\int_0^1dt
+     =\frac{\partial f}{\partial x^j}(x_0)
+\end{align}
+allora \begin{align}
+    &f(x)-f(x_0)=\sum_{j=1}^n(x^j-x_0^j)g_j(x)\implies\\
+    &f(x)=f(x_0)+\sum_{j=1}^n(x^j-x_0^j)g_j(x).
+\end{align}
+$g_j(x)$ sono di classe $C^\infty$ in $U$ quindi sono contenute nei germi $g_j\in C_{x_0}^\infty$.\hfill$\blacksquare$
+\begin{osservazione}
+    Tale lemma è valido esclusivamente per funzioni di classe $C^\infty$.
+\end{osservazione}
+Si vuole dimostrare ora che $ \dim X=n\implies\dim T_pX=n$, si dimostra prima un caso pià semplice in cui la varietà $X$ è un'aperto di $\R^n$, si sfrutta poi il fatto che localmente ogni varietà è identificata tramite una carta locale da un'aperto di $\R^n$.
+\begin{proposizione}La proposizione è divisa in due punti.\bigskip
+
+\noindent\boxedMath{1} Sia $U\subset\R^n$ un'aperto, sia $x_0\in U$, si consideri la funzione\begin{align}
+        &\iota :\R^n\rightarrow T_{x_0}U\\
+        &(a^1\dots,a^n)=v\longmapsto \iota(v)=\sum_{j=1}^na^j\frac{\partial}{\partial x^j}\hphantom{.}_{|x_0}
+    \end{align}
+    $\iota(v)$ non è altro che la derivata direzionale nella direzione specificata da $v$. $\iota$ è un'isomorfismo di spazi vettoriali.\bigskip
+
+    \noindent\boxedMath{2} Sia $X$ una $n$-varietà, e sia $p\in X$. Lo spazio tangente $T_pX$ è uno spazio vettoriale di dimensione $n$. Se $\varphi=(x^1\dots,x^n)$ è una carta locale in $p$, allora\begin{equation}
+        \Big\{\frac{\partial}{\partial x^1}\hphantom{.}_{|p},
+        \frac{\partial}{\partial x^2}\hphantom{.}_{|p},\dots
+        \frac{\partial}{\partial x^n}\hphantom{.}_{|p}\Big\}
+    \end{equation} 
+    è una base per $T_pX$.
+\end{proposizione}
+\textit{Dimostrazione}: Si dimostrano separatamente i due punti.
+
+\noindent\boxedMath{1}Si comincia col dimostrare che $\iota$ è un'isomorfismo, per definizione è chiaramente lineare, bisogna dimostrare che è biettiva. Sia $v=(a^1\dots, a^n)\ne 0$ un vettore, per qualche $1\le h\le n$, si ha $a^h\ne 0$. Si consideri l'immagine di $\iota$ su $v$:\begin{equation}
+    \iota(v)=\sum_{j=1}^na^j\frac{\partial}{\partial x^j}\hphantom{.}_{|x_0}
+\end{equation}
+si deve dimostrare che $\iota(v)$ non è la derivazione nulla. Bisogna trovare una funzione tale per cui, applicando tale derivazione su questa funzione non si trova 0. Si consideri la funzione $\mathbf x:\R^n\rightarrow\R$ definita in tal modo \begin{equation}\label{eq:proiezione}
+    \mathbf x^h(q^1\dots,q^n)=q^h
+\end{equation}
+ossia la funzione che ad ogni vettore associa la $h$-esima coordinata, si ha \begin{equation}
+    \iota(v)(\mathbf x^h)=\sum_{j=1}^na^j\frac{\partial \mathbf x^h}{\partial x^j}\hphantom{.}_{|x_0}=\sum_{j=1}^{h-1}a^j\cdot 0+
+    a^h
+    +
+    \sum_{j=h+1}^{n}a^j\cdot 0=a^h\ne 0
+\end{equation}
+quindi $\iota(v)$ non è la derivazione nulla, $\iota$ è quindi iniettiva. Bisogna ora dimostrare la suriettività di $\iota$, sia $D\in T_{x_0}U$ una qualunque derivazione. Bisogna trovare $v$ tale che $D=\iota(v)$.
+
+Sia $ x^j\in C_{x_0}^\infty$ una funzione definita come in \eqref{eq:proiezione}, si pone $D( x^j)=a^j \in\R$. Si costruisce un vettore\begin{equation}
+    v=(a^1,a^2\dots a^n)=(D( x^1)\dots,D( x^n))
+\end{equation}
+Si vuole dimostrare che $D=\iota(v)$, ossia, si vuole mostrare che $D(f)=\iota(v)(f)$ per ogni $f\in C_{x_0}^\infty$. Si utilizza il Lemma \ref{lemma:funzioni_g}:\begin{align}
+    &D(f)=D[f(x_0)+\sum_{j=1}^n(x^j-x_0^j)g_j(x)]=\\
+    &D(f(x_0))+\sum_{j=1}^nD[(x^j-x_0^j)g_j(x)]
+\end{align}
+$D(f(x_0))$ è 0 dato che $f(x_0)$ è una costante
+\begin{align}
+    &D(f(x_0))+\sum_{j=1}^nD[(x^j-x_0^j)g_j(x)]=\\
+    &\sum_{j=1}^nD[(x^j-x_0^j)g_j(x)]
+\end{align}
+essendo che $D$ è una derivazione, si applica la regola di Leibniz
+\begin{align}
+    &\sum_{j=1}^n[D(x^j-x_0^j)g_j(x_0)+((x^j(x_0)-x_0^j))D(g_j)]
+\end{align}
+per definizione $x^j(x_0)=x_0^j$ quindi 
+\begin{align}
+    &\sum_{j=1}^n[D(x^j-x_0^j)g_j(x_0)+((x^j(x_0)-x_0^j))D(g_j)]=\\
+    &\sum_{j=1}^n[D(x^j-x_0^j)g_j(x_0)+((x^j_0-x_0^j))D(g_j)]=\\
+     &\sum_{j=1}^n D(x^j-x_0^j)g_j(x_0)
+\end{align}
+si sfrutta nuovamente l'additività di $D$
+\begin{align}
+     &\sum_{j=1}^n D(x^j-x_0^j)g_j(x_0)=\\
+     &\sum_{j=1}^n [D(x^j)-D(x_0^j)]g_j(x_0)=\\
+      &\sum_{j=1}^n D(x^j)g_j(x_0)
+\end{align}
+per definizione $D(x^j)=a^j$
+\begin{align}
+      &\sum_{j=1}^n D(x^j)g_j(x_0)=\\
+      &\sum_{j=1}^n a^jg_j(x_0)
+\end{align}
+per il lemma, la funzione $g_j$ in $x_0$ assume lo stesso valore della derivata parziale di $f$ rispetto $x^j$\begin{align}
+     &\sum_{j=1}^n a^jg_j(x_0)=\\
+      &\sum_{j=1}^n a^j\frac{\partial f}{\partial x^j}(x_0)=\iota(v)(f).
+\end{align}
+Si è dimostrato che $D=\iota(v)$, $\iota$ è un'isomorfismo di spazi vettoriali, $T_{x_0}U$ ha la stessa dimensione di $U\subset\R^n$.\bigskip
+
+\noindent\boxedMath{2} Bisogna mostrare che lo stesso risultato si estende ad ogni varietà. Sia $X$ una varietà con $p\in X$, sia $(U,\varphi)$ una carta locale con $p\in U$. È banale che $\varphi$ sia un diffeomorfismo di varietà, sappiamo essere un omeomorfismo fra $X$ e $\R^n$\begin{equation}
+    X\supset U \longrightarrow V=\varphi(U)\subset\R^n
+\end{equation}
+se l'espressione locale di $\varphi$ è un diffeomorfismo fra aperti di $\R^n$ allora anche $\varphi$ lo è, ma la rappresentazione locale di $\varphi$ è la composizione fra $\varphi$ e $\varphi^{-1}$ (è l'identità in $V$).
+\begin{center}
+\begin{tikzpicture}
+    \matrix (m) [matrix of math nodes, row sep=3em, column sep=3em, minimum width=2em]
+    {
+        X \supset U & V \subset \mathbb{R}^n \\
+        \mathbb{R}^n \supset \varphi(U) = V & V \subset \mathbb{R}^n \\
+    };
+    \path[->] (m-1-1) edge node[above] {$\varphi$} (m-1-2);
+    \path[->] (m-2-1) edge node[above] {$\widetilde{\varphi}$} (m-2-2);
+    \path[->] (m-1-1) edge node[left] {$\varphi$} (m-2-1); % Adjusted position to 'left'
+    \path[->] (m-1-2) edge node[right] {Id} (m-2-2);
+\end{tikzpicture}
+\end{center}
+L'identità è ovviamente un diffeomorfismo. Si consideri il differenziale di $\varphi$ in $p$\begin{equation}
+    d\varphi_p:T_pU=T_pX\longrightarrow T_{\varphi(p)}\varphi(U)
+\end{equation}
+Ma $T_{\varphi(p)}\varphi(U)$ è isomorfo ad $\R^n$ (per il punto 1 della dimostrazione). Per le proprietà del differenziale, se la funzione fra varietà $\varphi$ è un diffeomorfismo, il differenziale $d\varphi_p$ è un'isomorfismo, ma questo allora è isomorfo ad $\R^n$, allora la dimensione di $T_pX$ è $n$. Un'isomorfismo mappa i vettori di una base nell'altra, i vettori \begin{equation}
+        \Big\{\frac{\partial}{\partial x^1}\hphantom{.}_{|p},
+        \frac{\partial}{\partial x^2}\hphantom{.}_{|p},\dots
+        \frac{\partial}{\partial x^n}\hphantom{.}_{|p}\Big\}
+    \end{equation} 
+Sono le immagini tramite $d\varphi_p^{-1}$ dei vettori della base canonica di $\R^n$, sono quindi una base per $T_pX$.\hfill$\blacksquare$\bigskip
+
+
+\noindent In conclusione, lo spazio tangente in un punto di una varietà $n$-dimensionale è isomorfo ad $\R^n$.
 \end{document}
 
