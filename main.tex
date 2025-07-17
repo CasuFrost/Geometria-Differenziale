@@ -864,6 +864,9 @@ L'insieme delle derivazioni per $X$ in $p$ è denotato $Der_p$. Il numero reale 
         T_pX=Der_p.
      \end{equation}
 \end{definizione}
+\begin{center}
+     \includegraphics[width=0.4\textwidth ]{images/spazio_tangente.pdf}
+\end{center}
 Se $n$ è la dimensione della varietà $X$, $Der_p$ è isomorfo a $\R^n$. $T_pX$ è definito esclusivamente dalla varietà $X$ e da un punto $p$, e non dipende dalle carte locali.\bigskip
 
 Si consideri un punto $p\in X$ di una varietà, ad ogni punto possiamo associare l'anello $C_p^\infty$, vogliamo però associare ad ogni punto uno spazio tangente. In $C_p^\infty$ potremmo considerare il sottoinsieme di  tutti i germi di funzioni che si annullano in $p$\begin{equation}
@@ -1150,5 +1153,289 @@ Sono le immagini tramite $d\varphi_p^{-1}$ dei vettori della base canonica di $\
 
 
 \noindent In conclusione, lo spazio tangente in un punto di una varietà $n$-dimensionale è isomorfo ad $\R^n$.
+\subsection{Il Differenziale in Coordinate Locali}
+Si consideri una varietà $X$ con $(U,\varphi)$ una carta, ed una varietà $Y$ con una carta $(V,\psi)$, sia $F:X\rightarrow Y$ una funzione differenziabile, l'espressione locale di $F$ è \begin{align}
+    &\tilde F:\R^m\supset\varphi(U)\longrightarrow\psi(V)\subset\R^n\\
+    &\tilde F = \psi\circ F\circ \varphi^{-1}
+\end{align}
+considerando la restrizione di $F$ su $U$.
+$\tilde F$ è definita da un aperto di $\R^m$ ad un'aperto di $\R^n$, si identifichino con $x=(x^1,\dots x^m)$ le coordinate del dominio e con $y=(y^1\dots, y^n)$ quelle del codominio\begin{equation}
+    y=\tilde F(x).
+\end{equation}
+Sia $p\in U$, Tramite $\varphi$ si identifica la base dello spazio tangente $T_pX$:\begin{equation}
+    \frac{\partial}{\partial x^1}\hphantom{.}_{|p},
+        \frac{\partial}{\partial x^2}\hphantom{.}_{|p},\dots
+        \frac{\partial}{\partial x^m}\hphantom{.}_{|p}.
+\end{equation}
+Tramite $\psi$ si identifica la base dello spazio tangente $T_{F(p)}Y$:\begin{equation}
+    \frac{\partial}{\partial y^1}\hphantom{.}_{|F(p)},
+        \frac{\partial}{\partial y^2}\hphantom{.}_{|F(p)},\dots
+        \frac{\partial}{\partial y^n}\hphantom{.}_{|F(p)}.
+\end{equation}
+Il differenziale di $F$ in $p$ è \begin{equation}
+    dF_p:T_pX\rightarrow T_{F(p)}Y
+\end{equation}
+si vuole scrivere la matrice della funzione $dF_p$, essendo questa lineare, tale matrice dipende dalle basi fissate.\begin{itemize}
+    \item $dF_p$ è definita in maniera canonica.
+    \item La sua matrice dipende dalle basi scelte, che a loro volta dipendono dalle carte locali.
+\end{itemize}
+Si vuole trovare la matrice\begin{equation}A=\begin{pmatrix}
+a^1_1&\dots & a^k_1&\dots &a^n_1\\
+\vdots& & \vdots&&\vdots\\ 
+a^1_h&\dots & a^k_h&\dots &a^n_h\\
+\vdots& & \vdots&&\vdots\\ 
+a^1_m&\dots & a^k_m&\dots &a^n_m\\
+\end{pmatrix}=(a^k_h)\end{equation}
+tale per cui\begin{equation}
+    dF_p(\frac{\partial}{\partial x^h}\hphantom{.}_{|p})=\sum_{k=1}^na^k_h \frac{\partial}{\partial y^k}\hphantom{.}_{|F(p)}.
+\end{equation}
+I vettori tangenti sono derivazioni, è necessaria una funzione su cui applicare tali derivazioni,
+si consideri un germe di funzione $g_{F(p)}\in C^\infty_{F(p)}$, scegliendone un rappresentante $g$ definito in un'intorno aperto $W$ di $F(p)$ tale che $W\subset V$.
+\[
+    \begin{tikzcd}
+        V \supset W \arrow[rr, "g"] \arrow[d, "\psi"] & & \mathbb{R} \\
+        \psi(V) \supset \psi(W) \arrow[urr, "\tilde{g}"] & &
+    \end{tikzcd}
+\]
+Dove $\tilde g=g\circ\psi^{-1}$ è la rappresentazione locale di $g$. $\tilde g$ è una funzione di $n$ variabili reali a valori reali. Si consideri il differenziale di $F$ applicato al vettore tangente in $p$:\begin{align}
+    &dF_p(\frac{\partial}{\partial x^h}\hphantom{.}_{|p})(g)=\\
+    &(\frac{\partial}{\partial x^h}\hphantom{.}_{|p}\circ F_p^*)(g)=
+\end{align}
+Il differenziale è la composizione della derivazione con il pull back $F_p^*$
+\begin{align}
+    &(\frac{\partial}{\partial x^h}\hphantom{.}_{|p}\circ F_p^*)(g)=\frac{\partial}{\partial x^h}\hphantom{.}_{|p}(g\circ F)\end{align}
+Per calcolare la derivata $\frac{\partial}{\partial x^h}\hphantom{.}_{|p}(g\circ F)$ in un punto della varietà differenziabile bisogna calcolare la derivata parziale sulle coordinate locali
+    \begin{align}
+     &\frac{\partial}{\partial x^h}(\tilde g\circ\tilde F)\hphantom{.}_{|\varphi(p)}
+\end{align}
+si applica il teorema di derivazione di funzioni composte, $\tilde g\circ\tilde F$ è in funzione delle variabili $x=(x^1,\dots x^m)$ e si ha che $y=\tilde F(x)$\begin{equation}
+    y^k=\tilde F^k(x)
+\end{equation}
+    \begin{align}
+     &\frac{\partial}{\partial x^h}(\tilde g\circ\tilde F)\hphantom{.}_{|\varphi(p)}=
+     \sum_{k=1}^n\frac{\partial\tilde g}{\partial y^k}\hphantom{.}_{|\tilde F(\varphi(p))}\frac{\partial y^k}{x^h}\hphantom{.}_{|\varphi(p)}=\\
+     &\sum_{k=1}^n\Big(\frac{\partial\tilde F^k}{\partial x^h}\hphantom{.}_{|\varphi(p)}\frac{\partial}{\partial y^k}\hphantom{.}_{|\tilde F(\varphi(p))}\Big)(\tilde g)=\\
+      &\sum_{k=1}^n\Big(\frac{\partial\tilde F^k}{\partial x^h}\hphantom{.}_{|\varphi(p)}\frac{\partial}{\partial y^k}\hphantom{.}_{|\tilde F(p)}\Big)( g)
+\end{align}
+si ha quindi\begin{equation}
+    dF_p(\frac{\partial}{\partial x^h}\hphantom{.}_{|p})=
+    \sum_{k=1}^n\frac{\partial\tilde F^k}{\partial x^h}\hphantom{.}_{|\varphi(p)}\frac{\partial}{\partial y^k}\hphantom{.}_{|\tilde F(p)}
+\end{equation}
+inoltre prima si è posto che 
+\begin{equation}
+    dF_p(\frac{\partial}{\partial x^h}\hphantom{.}_{|p})=\sum_{k=1}^na^k_h \frac{\partial}{\partial y^k}\hphantom{.}_{|F(p)}.
+\end{equation}
+ne consegue che \begin{equation}
+    a_h^k=\frac{\partial\tilde F^k}{\partial x^h}\hphantom{.}_{|\varphi(p)}
+\end{equation}
+si è così definita la matrice del differenziale $dF_p$. Ne consegue che la matrice che rappresenta il differenziale $dF_p$ è la \textit{matrice Jacobiana} della funzione $\tilde F=\psi\circ F\circ\varphi^{-1}$. 
+\begin{teorema}\label{teo:func_inv_varietà}\textbf{(della funzione inversa per varietà)}
+    Sia $F:X\rightarrow Y$ una funzione differenziabile fra due varietà, sia $p\in X$ tale che il differenziale $dF_p:T_pX\rightarrow T_{F(p)}Y$ sia un isomorfismo. Esistono un intorno $U\subset X$ di $p$ ed un intorno $V\subset Y$ di $F(p)$ tali per cui \begin{equation}
+        F_{|U}:U\rightarrow V 
+    \end{equation}
+    è un diffeomorfismo.
+\end{teorema}
+\textit{Dimostrazione}: è un problema di natura locale, localmente una varietà si identifica con un aperto di $\R^n$. Si scelgono due carte per $X$ e per $Y$\begin{align}
+    &(U,\varphi)\text{ per }X\\
+    &(V,\psi)\text{ per }Y
+\end{align}
+con $F(p)\in V$, $\tilde F$ è la rappresentazione locale rispetto $\varphi$ e $\psi$, ed il differenziale è rappresentato dalla matrice\begin{equation}
+    \text{Jac}\tilde F=\begin{pmatrix}
+       \displaystyle \frac{\partial\tilde F^k}{\partial x^h}
+    \end{pmatrix}
+\end{equation}
+Se $dF_p$ è un'isomorfismo, allora $  \text{Jac}\tilde F_{|\varphi(p)}$ è invertibile, a tal punto si può applicare il classico teorema della funzione inversa per $\tilde F$.\hfill$\blacksquare$\bigskip 
+
+
+\noindent Anche il teorema della funzione implicita si può generalizzare al caso delle varietà differenziabili, nel caso classico, il teorema è il seguente.\begin{teorema}\textbf{(funzione implicita)}
+    Sia $U$ un aperto di $\R^n\times \R^m$, di coordinate $(x^1,\dots x^n,y^1\dots, y^m)$. Sia $\phi: U\rightarrow \R^m$ una funzione differenziabile e sia $(x_0,y_0)\in U$ tale che la matrice \begin{equation}
+        \begin{pmatrix}
+            \displaystyle\frac{\partial \phi^i}{\partial y^j}(x_0,y_0)
+        \end{pmatrix}, \ \ \begin{matrix}
+            1\le j\le m\\ 
+            1\le i\le m\\ 
+        \end{matrix}
+    \end{equation}
+    sia invertibile, allora esistono due intorni di $x_0$ e $y_0$\begin{align}
+        &x_0\in V_0\subset\R^n\\
+        &y_0\in W_0\subset \R^m
+    \end{align}
+    ed una funzione differenziabile\begin{equation}
+        F:V_0\longrightarrow W_0
+    \end{equation}
+    tale che, dato $z_0=\phi(x_0,y_0)$, l'insieme $\phi^{-1}(z_0)\cap (V_0\times W_0)$
+    coincide con il grafico di $F$, ossia, per ogni $(x,y)\in V_0\times W_0$ si ha\begin{equation}
+        \phi(x,y)=z_0\iff y=F(x).
+    \end{equation}
+\end{teorema}
+È un modo formale per dire che data un'equazione del tipo $\phi(x,y)=z_0$ con $z_0$ costante, si può ricavare $y$ in funzione di $x$ tramite $F$.\begin{teorema}\textbf{(funzione implicita per le varietà)}
+    Sia $\phi:X\times Y\rightarrow Y$ una funzione differenziabile con $X,Y$ due varietà, per ogni $p\in X$ si definisce una funzione\begin{equation}
+        \phi_p:Y\rightarrow Y
+    \end{equation}
+    ponendo\begin{equation}
+        \phi_p(q)=\phi(p,q).
+    \end{equation}
+    Si consideri $(p_0,q_0)\in X\times Y$ tale che il differenziale\begin{equation}
+        d(\phi_{p_0})_{q_0}:T_{q_0}Y\longrightarrow T_{r_0}Y
+    \end{equation}
+    ha matrice associata invertibile ($d(\phi_{p_0})_{q_0}$ è un isomorfismo), dove $r_0=\phi(p_0,q_0)$. Allora esistono due intorni
+    \begin{align}
+        &p_0\in V_0\subset X\\
+        &q_0\in W_0\subset Y
+    \end{align}
+    ed una funzione differenziabile\begin{equation}
+        F:V_0\longrightarrow W_0
+    \end{equation}
+    tale che l'insieme\begin{equation}
+        \phi^{-1}(r_0)\cap (V_0\times W_0)
+    \end{equation}
+    coincide con il grafico di $F$, ossia per ogni $(p,q)\in V_0\times W_0$ si ha 
+    \begin{equation}
+        \phi(p,q)=r_0\iff q=F(p).
+    \end{equation}
+\end{teorema}
+La dimostrazione procede con il ricondursi al caso degli aperti di $\R^n$ tramite le carte locali.
+
+\chapter{Immersioni e Sommersioni}
+Si consideri una funzione differenziabile $F:X\rightarrow Y$ fra due varietà. Si definisce \textit{rango} di $F$ in $p\in X$, il rango della matrice associata al differenziale $dF_p$, questo è il rango della matrice Jacobiana della rappresentazione local $\tilde F$ in un punto $\varphi(p)$, dove $\varphi$ è una carta locale.\begin{definizione} La funzione $F$ può essere caratterizzata come segue:
+    \begin{enumerate}
+        \item $F$ è un'\textbf{immersione} se il differenziale $dF_p:T_pX\rightarrow T_{F(p)}Y$ è iniettivo $\forall p\in X$.
+        \item $F$  è una \textbf{sommersione} se il differenziale $dF_p:T_pX\rightarrow T_{F(p)}Y$ è suriettivo $\forall p\in X$.
+        \item $F$ è un \textbf{embedding} se è un'immersione e se $F$ è un'omeomorfismo sull'immagine, ossia, $F$ è un'omeomorfismo fra $X$ ed $F(X)$.
+    \end{enumerate}
+\end{definizione}
+Si considerano adesso alcuni esempi, sia $\alpha$ la curva\begin{align}
+    &\alpha:\R\rightarrow\R^2\\
+    &t\longmapsto (t^2,t^3)
+\end{align}
+è la curva riportata in figura \ref{img:esempio_curva}.
+
+\begin{figure}[h!]
+    \center
+    \begin{tikzpicture}
+    \draw[->] (-2,0) -- (2,0) node[right] {$x$};
+    \draw[->] (0,-2) -- (0,2) node[above] {$y$};
+    \draw[blue, thick, domain=-1.23:1.23, samples=20] plot (\x*\x, \x*\x*\x);
+\end{tikzpicture}
+    \caption{La curva $\alpha$.}
+    \label{img:esempio_curva}
+\end{figure}
+La funzione $\alpha$ è iniettiva, ma il differenziale non è sempre iniettivo, il differenziale è \begin{equation}
+    d\alpha(t)=\begin{pmatrix}
+        2t\\3t^2
+    \end{pmatrix}
+\end{equation}
+si annulla in $t=0$, quindi $ d\alpha(0)$ non è iniettivo. $\alpha$ non è quindi un'immersione.\bigskip
+
+Si consideri ora la curva \begin{align}
+    &\beta:\R\rightarrow\R^2\\
+    &t\longmapsto (t^3-4t,t^2-4)
+\end{align}
+riportata in figura 
+\ref{img:esempio_curva2}.
+
+\begin{figure}[h!]
+    \center
+    \begin{tikzpicture}[scale=0.5]
+    \draw[->] (-6,0) -- (6,0) node[right] {$x$};
+    \draw[->] (0,-4.3) -- (0,2.8) node[above] {$y$};
+    \draw[blue, thick, domain=-2.5:2.5, samples=50] plot (\x*\x*\x-4*\x, \x*\x-4);
+\end{tikzpicture}
+    \caption{La curva $\beta$.}
+    \label{img:esempio_curva2}
+\end{figure}
+$\beta$ è un'immersione perché il differenziale \begin{equation}
+    d\beta(t)=\begin{pmatrix}
+        3t^2-4\\2t
+    \end{pmatrix}
+\end{equation}
+non è mai nullo, tutta via, $\beta$ non è iniettiva, dato che $\beta(-2)=\beta(2)=(0,0)$, quindi non è un'embedding.\bigskip
+
+Si consideri infine la curva $\gamma:(-\frac{\pi}{2},\frac{3}{2}\pi)\rightarrow\R^2$ definita come segue\begin{equation}
+    \gamma(t)=(\sin(2t),\cos t)
+\end{equation}
+riportata in figura \ref{img:esempio_curva2}.
+\begin{figure}[h!]
+    \center
+    \begin{tikzpicture}
+\begin{axis}[
+    xlabel=$x$,
+    ylabel=$y$,
+    axis lines=middle,
+    xmin=-1.5, xmax=1.5,
+    ymin=-1.5, ymax=1.5,
+    samples=200, % Aumenta il numero di campioni per una curva più liscia
+    domain=-pi:2*pi % Intervallo di t per la visualizzazione
+]
+\addplot[
+    domain=-pi/2+0.02:3/2*pi-0.02, % L'intervallo di dominio per la funzione
+    samples=200, % Numero di punti per disegnare la curva
+    variable=t, % Indica che t è la variabile del parametro
+    blue, % Colore della curva
+    smooth, % Rende la curva più liscia
+    thick % Spessore della curva
+] ({sin(deg(2*t))}, {cos(deg(t))}); % Le coordinate (x,y) della curva parametrica
+\end{axis}
+\end{tikzpicture}
+    \caption{La curva $\gamma$.}
+    \label{img:esempio_curva3}
+\end{figure}
+il differenziale $d\gamma$ non si annulla mai\begin{equation}
+    d\gamma(t)=\begin{pmatrix}
+        2\cos(2t)\\ -\sin t
+    \end{pmatrix}
+\end{equation}
+ $\gamma$ è quindi un'immersione, dato che è iniettiva, l'inversa di $\gamma$ non è una funzione continua, dato che l'immagine di $\gamma$ è compatta, mentre il dominio no, quindi non avendo le stesse proprietà topologiche, $\gamma$ non può essere un omeomorfismo, non può quindi essere un embedding.\bigskip
+
+ Una proprietà importante è la seguente: Ogni immersione, è localmente un embedding.\begin{teorema}
+    Sia $F:X_1\rightarrow X_2$ una immersione, per ogni $p\in X_1$ esiste un'aperto arbitrariamente piccolo $U\subset X_1$ di $p$ tale che \begin{equation}
+        F_{|U}:U\rightarrow X_2
+    \end{equation}
+    è un embedding.
+ \end{teorema}
+La dimostrazione è omessa.
+\begin{osservazione}
+    Se una funzione $F:X\rightarrow Y$ è una immersione iniettiva, allora l'immagine $F(X)$ ha una struttura di varietà differenziabile indotta da quella di $X$, l'atlante che esiste su $X$ è valido anche su $F(X)$:\begin{itemize}
+        \item$\{(U_\alpha,\varphi_\alpha)\}\text{ atlante per }X$
+         \item$\{(F(U_\alpha),\varphi_\alpha\circ F^{-1}_{|U_\alpha})\}\text{ atlante per }F(X)$.
+    \end{itemize}
+\end{osservazione}
+\[
+\begin{tikzcd}[column sep=huge, row sep=huge]
+X\supset U \arrow[r,"F"] \arrow[dr, "\varphi"] & F(U)\subset F(X) \arrow[d, "\varphi \circ F^{-1}"] \\
+& \varphi(U) \subset \mathbb{R}^m
+\end{tikzcd}
+\] 
+Sorge un problema, $F(X)\subset Y$, ed $Y$ è una varietà, è possibile che la struttura di varietà costruita su $F(X)$ utilizzando l'atlante di $X$, non sia compatibile con la struttura di varietà di $Y$.
+\begin{osservazione}
+    Non è facile in generale stabilire se un'immersione iniettiva è un embedding.
+\end{osservazione}
+\begin{teorema}
+    Sia $f:M\rightarrow N$ un'immersione iniettiva. Se $M$ è compatta, $f$ è un embedding.
+\end{teorema}
+\textit{Dimostrazione}: $M$ è uno spazio topologico compatto. $N$ è uno spazio topologico di Hausdorff (per ipotesi stabilite fin dall'inizio), $f$ è differenziabile, quindi continua, ed iniettiva per ipotesi. $f$ determina un omeomorfismo fra $M$ e $f(M)$, bisogna solo mostrare che $f^{-1}$ è continua, ma essendo $M$ compatto, questo è assicurato (risultato standard della topologia). \hfill$\blacksquare$\bigskip
+
+\noindent Il risultato è una conseguenza del seguente teorema.
+\begin{teorema}
+    Sia $f:X\rightarrow Y$ una funzione biettiva e continua fra due spazi topologici, tali per cui $X$ è compatto ed $Y$ è di Hausdorff, allora $f$ è un omeomorfismo.
+\end{teorema}
+\textit{Dimostrazione}: Sia $g$ l'inversa di $f$\begin{equation}
+    g=f^{-1}:Y\rightarrow X 
+\end{equation}
+bisogna dimostrare che $g$ sia continua. Basta dimostrare che, per ogni insieme chiuso $V\subset Y$, l'anti-immagine  $g^{-1}(V)=f(V)$ è un'insieme chiuso, ma $V$ essendo chiuso in $X$, ed essendo $X$ compatto, risulta anche esso stesso compatto, e $f(V)$ è l'immagine tramite una funzione continua di un'insieme compatto, quindi $f(V)$ è compatto. $f(V)\subset Y$, $Y$ è di Hausdorff, quindi $f(V)$ essendo compatto è anche chiuso.\hfill$\blacksquare$\bigskip
+
+\noindent 
+Un corollario è il seguente: Se $f:X\rightarrow Y$ è continua ed iniettiva, con $X$  compatto e $Y$  di Hausdorff, $f$ determina un omeomorfismo fra $X$ e $f(X)$, $f$ è quindi un embedding (fra spazi topologici) di $X$ in $Y$ .
+\section{Sottovarietà}
+\begin{definizione}
+    Una \textbf{sottovarietà embedded} (o semplicemente sottovarietà) di una varietà $X$ è un sottoinsieme $Z\subset X$ dotato di una struttura di varietà differenziabile, tale per cui la mappa di inclusione canonica $\iota:Z\rightarrow X$ sia un embedding.
+\end{definizione}
+\begin{definizione}
+    Sia $F:X\rightarrow Y$ una immersione iniettiva, $F(X)$ è una \textbf{sottovarietà immersa}, ed eredita la struttura di varietà indotta da $X$ tramite $F$.
+\end{definizione}
+La condizione di sottovarietà embedded è più forte rispetto la condizione di sottovarietà immersa.\bigskip
+
+\noindent Si considera ora un esempio di sottovarietà immersa, che non è embedded,
+\redText{lezione 8 minuto 9.40}
 \end{document}
 
